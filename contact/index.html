@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+
+        <script src="../javascript/band.js"></script>
+        <link rel="stylesheet" href="../css/band-admin.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous"
+        />
+        <!-- JavaScript Bundle with Popper -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+            crossorigin="anonymous"
+        ></script>
+
+        <link rel="stylesheet" href="fonts/icomoon/style.css" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+        <!-- Style -->
+        <link rel="stylesheet" href="css/style.css" />
+
+        <title>Contact Form #6</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../html/index.html"
+                    ><span class="yellow">UGA</span
+                    ><span class="red">AMAX</span></a
+                >
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarSupportedContent navinfo"
+                >
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
+              <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="#"
+                  >Home</a
+              >
+          </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="artists.html">Artists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="comedian.html"
+                                >Comedians</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="band.html">Bands</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../contact/index.html"
+                                >Contact Us</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="
+                                    nav-link
+                                    dropdown-toggle
+                                    btn btn-outline-secondary
+                                "
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Account
+                            </a>
+                            <ul
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdown"
+                            >
+                                <li>
+                                    <a class="dropdown-item" href="login.html"
+                                        >Logout</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- <form class="d-flex">
+          <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">
+              Search
+          </button>
+      </form> -->
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <h3 class="heading mb-4">
+                                    Please get in touch with us!
+                                </h3>
+                                <p>Fill in the form with youe details.</p>
+
+                                <p>
+                                    <img
+                                        src="images/undraw-contact.svg"
+                                        alt="Image"
+                                        class="img-fluid"
+                                    />
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <form
+                                    class="mb-5"
+                                    method="post"
+                                    id="contactForm"
+                                    name="contactForm"
+                                >
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                name="name"
+                                                id="name"
+                                                placeholder="Your name"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                name="email"
+                                                id="email"
+                                                placeholder="Email"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                name="subject"
+                                                id="subject"
+                                                placeholder="Subject"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <textarea
+                                                class="form-control"
+                                                name="message"
+                                                id="message"
+                                                cols="30"
+                                                rows="7"
+                                                placeholder="Write your message"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input
+                                                type="submit"
+                                                value="Send Message"
+                                                class="
+                                                    btn btn-primary
+                                                    rounded-0
+                                                    py-2
+                                                    px-4
+                                                "
+                                            />
+                                            <span class="submitting"></span>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div id="form-message-warning mt-4"></div>
+                                <div id="form-message-success">
+                                    Your message was sent, thank you!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

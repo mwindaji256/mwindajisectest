@@ -1,0 +1,44 @@
+extends layout 
+block content
+  main#main(data-aos='fade-in')
+    // ======= Breadcrumbs =======
+    .breadcrumbs
+      .container
+        h2 Solo Artists
+    // End Breadcrumbs
+    section#bands.bands
+      .col-md-5.container.mb-5
+        form.d-flex.search-artist(method='post' action='/artistinfo/list')
+              select#filter.form-select(aria-label='Default select example' name='filter')
+                option(selected='' value='Name') Name
+                option(value='Gender') Gender
+                option(value='Home') Home
+                option(value='Albums') Albums
+                option(value='Songs') Songs
+              input.form-control.me-2(type='search' placeholder='Search for your artist' aria-label='Search' name='stagename')
+              button.btn.btn-warning(type='submit')
+                | Search 
+      .container(data-aos='fade-up')
+        .row.g-4(data-aos='zoom-in' data-aos-delay='100')
+          if user.length
+          each val in user
+              .col-md-6.col-lg-3
+                  .card 
+                      .card-body.text-center
+                          a(href='/artist/'+val._id)
+                              img.img-fluid.mb-3(src=val.img alt='' style='height: 300px; width: 250px')
+                          h3.card-title.mb-3.text-dark #{val.username}
+                          .card-content
+                              p
+                              | #{val.profile}
+                              .social
+                              a(href='')
+                                  i.bi.bi-twitter
+                              a(href='')
+                                  i.bi.bi-facebook
+                              a(href='')
+                                  i.bi.bi-instagram
+                              a(href='')
+                                  i.bi.bi-linkedin
+
+

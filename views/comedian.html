@@ -1,0 +1,176 @@
+<form
+style="max-width: 600px; margin: auto"
+name="checkout"
+>
+
+<label for="start">Name:</label>
+<div class="input-icons">
+    <i class="fa fa-user icon"> </i>
+    <input
+    name="username"
+        class="input-field"
+        type="text"
+        placeholder="Maroom 5"
+    />
+</div>
+
+<label for="start">Owner:</label>
+<div class="input-icons">
+    <i class="fa fa-music icon"></i>
+    <input
+    name="useremail"
+        class="input-field"
+        type="text"
+        placeholder="Odeke Trevor"
+    />
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <label for="nin">Band home:</label>
+        <div class="input-icons">
+            <i class="fa fa-user-circle icon"></i>
+            <input
+            name="username"
+            id="nin"
+                class="input-field"
+                type="text"
+                placeholder="Masaka"
+            />
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="nin">Number of members:</label>
+        <div class="input-icons">
+            <i class="fa fa-users icon"></i>
+            <input
+            name="location"
+            id="location"
+                class="input-field"
+                type="number"
+                placeholder="4"
+            />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <!-- <p>Date of birth</p> -->
+        <label for="start">Date of formation:</label>
+
+        <input type="date" id="start" name="trip-start"
+                class="input-field"
+               value="2018-07-22">
+    </div>
+
+    <div class="col-6 user_gender">
+        Names of sponsors: <input type="checkbox" id="myCheck" onclick="myFunction()">
+        <!-- <p id="text" style="display:none">Checkbox is CHECKED!</p> -->
+        <div class="input-icons" id="text" style="display:none">
+            <i class="fa fa-location-arrow icon"></i>
+            <input
+            name="location"
+            id="location"
+                class="input-field"
+                type="text"
+                placeholder="Names of sponsors"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <label for="nin">Slogan:</label>
+        <div class="input-icons">
+            <i class="fa fa-quote-right icon"></i>
+            <input
+            name="username"
+            id="nin"
+                class="input-field"
+                type="text"
+                placeholder="Bring music to life"
+            />
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="nin">Names of sponsors:</label>
+        <div class="input-icons">
+            <i class="fa fa-location-arrow icon"></i>
+            <input
+            name="location"
+            id="location"
+                class="input-field"
+                type="text"
+                placeholder="Location"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <label for="album">Band icon:</label>
+        <div class="input-icons">
+           
+              <input type="file" id="profile_pic" name="profile_pic"  class="input-field"
+              accept=".jpg, .jpeg, .png">
+        </div>
+    </div>
+    <div class="col-6">
+
+        <div class="input-icons">
+            <label for="dog-names">Choose a category:</label>
+            <select name="dog-names" id="dog-names" class="input-field">
+                <option value="rigatoni">Reggae</option>
+              <option value="dave">Rap</option>
+              <option value="pumpernickel">Pop</option>
+              <option value="reeses">G</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <label for="album">Artist ID:</label>
+        <div class="input-icons">
+            <i class="fa fa-id-badge icon"></i>
+            <input
+            name="username"
+                class="input-field"
+                type="text"
+                id="artist_id"
+                placeholder="Artist ID"
+            />
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="start">Date started:</label>
+
+        <input type="date" id="start" name="trip-start"
+        class="input-field"
+               value="2018-07-22"
+               min="2018-01-01" max="2018-12-31">
+    </div>
+</div>
+
+<button
+    class="submit"
+    type="button"
+    name="submitbtn"
+    onclick="validate()"
+>Submit</button>
+<!-- <input
+class="submit"
+type="button"
+name="submitbtn"
+onclick="validate()"
+
+/> -->
+
+</button>
+<button class="reset" type="reset" name="reset">
+    Reset
+</button>
+</form>

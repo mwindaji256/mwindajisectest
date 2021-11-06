@@ -1,0 +1,401 @@
+body {
+    background-color: #f2f2f2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: verdana;
+}
+#abc {
+    width: 100%;
+    height: 80%;
+    background-image: url(images/singer.jpg);
+    background-size: cover;
+}
+
+.logo {
+    padding-top: 0px;
+    float: left;
+    padding-right: 300px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* .layer {
+    background-color: rgba(248, 247, 216, 0.151);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+}
+
+.layer h1 {
+    padding-left: 300px;
+    padding-right: 200px;
+    float: right;
+    color: white;
+} */
+
+#navinfo {
+    padding-left: 900px;
+    float: left;
+}
+
+.container {
+    position: relative;
+    width: 50%;
+}
+
+.image {
+    display: block;
+    /* width: 100%; */
+    height: 450px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 25;
+    right: 0;
+    height: 450px;
+    width: 300px;
+    opacity: 0;
+    transition: 0.5s ease;
+    background-color: #008bba77;
+    border-radius: 10px;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    font-size: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.art-place {
+    margin-left: 50px;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium';
+}
+
+.name p {
+    font-size: medium;
+    color: #013344e7;
+}
+
+.signup {
+    height: 40px;
+    width: 180px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to left, #3facdf, #2575d1);
+    color: #fff;
+    font-weight: bolder;
+    margin-top: 30px;
+    cursor: pointer;
+    outline: none;
+}
+
+.create {
+    padding-left: 100px;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.icon {
+    padding: 10px;
+    padding-top: 15px;
+    color: gray;
+    min-width: 50px;
+    text-align: center;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    color: rgb(92, 92, 92);
+}
+
+.input-icons input[type='text'],
+[type='password'],
+[type='number'] {
+    padding-left: 50px;
+}
+
+.input-icons textarea {
+    padding-left: 50px;
+    padding-top: 10px;
+}
+/* input[type='text']::content {
+  padding-left: 50px;
+} */
+
+h2 {
+    color: green;
+}
+/* p {
+    color: green;
+} */
+
+.dob {
+    width: 30%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+}
+.gender {
+    width: 30%;
+    color: gray;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(221, 221, 221);
+}
+.payment {
+    width: 49%;
+    color: gray;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(241, 241, 241);
+    border: 4px;
+}
+
+.no-margin {
+    margin: 0px !important;
+}
+
+.pay-methods {
+    padding-bottom: 10px;
+}
+
+.cvv {
+    width: 50%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(221, 221, 221);
+}
+
+.user_gender {
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+.pick_gender {
+    width: 24%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(221, 221, 221);
+    color: gray;
+}
+.gender {
+    width: 45%;
+    text-align: center;
+}
+.big {
+    margin-top: 50px;
+    margin: auto;
+    width: 800px;
+    height: 600px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.bigger {
+    margin: auto;
+    width: 1000px;
+    height: 650px;
+    background-color: rgb(241, 241, 241);
+}
+
+.submit {
+    padding: 10px;
+    background-color: rgb(241, 241, 241);
+    border: 4px;
+    color: gray;
+    border-radius: 5px;
+    border: 1px solid rgb(221, 221, 221);
+}
+
+.reset {
+    padding: 10px;
+    color: white;
+    background-color: red;
+    border: 4px;
+
+    border-radius: 5px;
+}
+
+input[type='radio'] {
+    display: none;
+}
+
+input[type='radio'] + label {
+    width: 40%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 4px;
+    color: gray;
+    text-align: center;
+}
+input[type='radio']:checked + label {
+    /* border: 1px solid red; */
+    background-color: green;
+    color: white;
+}
+
+.pay-methods input[type='radio'] + label {
+    width: 49%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(221, 221, 221);
+
+    color: gray;
+    text-align: center;
+}
+
+.pay-methods input[type='radio']:checked + label {
+    /* border: 1px solid red; */
+    background-color: green;
+    color: white;
+}
+
+.user_gender input[type='radio'] + label {
+    width: 49%;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(241, 241, 241);
+
+    border: 1px solid rgb(221, 221, 221);
+    color: gray;
+    text-align: center;
+}
+
+.user_gender input[type='radio']:checked + label {
+    /* border: 1px solid red; */
+    background-color: green;
+    color: white;
+}
+
+/* SEARCH BAR */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    background: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00b4cc;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9dbfaf;
+}
+
+.searchTerm:focus {
+    color: #00b4cc;
+}
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #00b4cc;
+    background: #00b4cc;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* NEW SEARCH */
+/* Style the search box inside the navigation bar */
+.topnav input[type='text'] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+@media screen and (max-width: 600px) {
+    .topnav a,
+    .topnav input[type='text'] {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+    .topnav input[type='text'] {
+        border: 1px solid #ccc;
+    }
+}
+
+/* .main h1 {
+    padding-left: 100px;
+} */
+
+/* .main {
+    padding-top: 10px;
+}
+
+.artist-form {
+    padding-top: 100px;
+} */

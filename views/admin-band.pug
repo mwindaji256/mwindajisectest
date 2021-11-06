@@ -1,0 +1,173 @@
+doctype html
+head
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  script(src='/javascript/band.js')
+  link(rel='stylesheet' href='/css/band-admin.css')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU' crossorigin='anonymous')
+  // JavaScript Bundle with Popper
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ' crossorigin='anonymous')
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Document
+.bgimage
+  .layer
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
+      .container-fluid
+        a.navbar-brand(href='index.html')
+          span.yellow UGA
+          span.red AMAX
+        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse(id='navbarSupportedContent navinfo')
+          ul.navbar-nav.me-auto.mb-2.mb-lg-0
+            //
+              <li class="nav-item">
+              <a
+              class="nav-link active"
+              aria-current="page"
+              href="#"
+              >Home</a
+              >
+              </li>
+            li.nav-item
+              a.nav-link(href='artists.html') Artists
+            li.nav-item
+              a.nav-link(href='comedian.html') Comedians
+            li.nav-item
+              a.nav-link(href='band.html') Bands
+            li.nav-item
+              a.nav-link(href='../contact/index.html') Contact Us
+            li.nav-item
+              a.nav-link(href='about.html') About Us
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.dropdown-toggle.btn.btn-outline-secondary(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+                | Account
+              ul.dropdown-menu(aria-labelledby='navbarDropdown')
+                li
+                  a.dropdown-item(href='login.html') Logout
+          //
+            <form class="d-flex">
+            <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+            Search
+            </button>
+            </form>
+.main
+  form(method='post' action='/bands/register' enctype='multipart/form-data' style='max-width: 600px; margin: auto' name='registration' onsubmit='return validate()')
+    include partials/messages.pug
+    h2 REGISTER BAND
+    if user.success == true
+  
+     .alert.alert-success.d-flex.align-items-center(role='alert')
+      svg.bi.flex-shrink-0.me-2(width='24' height='24' role='img' aria-label='Success:')
+       use(xlink:href='#check-circle-fill')
+      div
+       | Band successfully created. 
+    else if user.success == false 
+         
+     .alert.alert-warning.d-flex.align-items-center(role='alert')
+      svg.bi.flex-shrink-0.me-2(width='24' height='24' role='img' aria-label='Warning:')
+       use(xlink:href='#exclamation-triangle-fill')
+      div
+       | #{user.msg}
+    label(for='start') Name:
+    p#name-error(style='display: none;')
+    .input-icons
+      i.fa.fa-user.icon  
+      input.input-field(name='bandname' type='text' placeholder='Afrigo Band')
+    label(for='start') Owner:
+    p#owner-error(style='display: none;')
+    .input-icons
+      i.fa.fa-music.icon
+      input.input-field(name='owner' type='text' placeholder='Odeke Trevor')
+    label(for='start') Email:
+    p#email-error(style='display: none;')
+    .input-icons
+      i.fa.fa-solid.fa-at.icon  
+      input.input-field(name='email' type='text' placeholder='trevor@gmail.com')
+    .row
+      .col-6
+        label(for='nin') Band home:
+        p#home-error(style='display: none;')
+        .input-icons
+          i.fa.fa-user-circle.icon
+          input#nin.input-field(name='home' type='text' placeholder='Masaka')
+      .col-6
+        label(for='nin') Number of members:
+        p#members-error(style='display: none;')
+        .input-icons
+          i.fa.fa-users.icon
+          input#location.input-field(name='members' type='number' placeholder='4')
+    .row 
+      .col-6
+        // <p>Date of birth</p>
+        label(for='start') Date of formation:
+        input#start.input-field(type='date' name='formation' value='2018-07-22')
+      .col-6.user_gender
+        | Names of sponsors: 
+        input#myCheck(type='checkbox' onclick='myFunction()')
+        // <p id="text" style="display:none">Checkbox is CHECKED!</p>
+        p#sponsors-error(style='display: none;')
+        #text.input-icons(style='display:none')
+          i.fa.fa-location-arrow.icon
+          input#location.input-field(name='sponsors' type='text' placeholder='Names of sponsors')
+    .row
+      .col-6
+        label(for='nin') Slogan:
+        p#slogan-error(style='display: none;')
+        .input-icons
+          i.fa.fa-quote-right.icon
+          input#nin.input-field(name='slogan' type='text' placeholder='Bring music to life')
+      .col-6
+        label(for='nin') Number of albums :
+        p#albums-error(style='display: none;')
+        .input-icons
+          i.fa.fa-location-arrow.icon
+          input#albums.input-field(name='albums' type='number' placeholder='3')
+    .row
+      .col-6
+        label(for='album') Band icon:
+        p#icon-error(style='display: none;')
+        .input-icons
+          input#bandicon.input-field(type='file' name='bandicon' accept='.jpg, .jpeg, .png')
+      .col-6
+        label(for='album') Band image:
+        p#image-error(style='display: none;')
+        .input-icons
+          input#bandimage.input-field(type='file' name='bandimage' accept='.jpg, .jpeg, .png')
+    .row
+      .col-6
+        label(for='album') Band ID:
+        p#bandid-error(style='display: none;')
+        .input-icons
+          i.fa.fa-id-badge.icon
+          input#artist_id.input-field(name='bandid' type='text' placeholder='Artist ID')
+      .col-6 
+        label(for='start') Date started:
+        // <p id="name-error" style="display: none;"></p>
+        input#start.input-field(type='date' name='startdate' value='2018-07-22' min='2018-01-01' max='2018-12-31')
+    .row
+      .col-6
+        .input-icons
+          label(for='category-names') Choose a category:
+          select#category.input-field(name='category')
+            option(value='Reggae') Reggae
+            option(value='Rap') Rap
+            option(value='Pop') Pop
+            option(value='Jazz') Jazz
+    button.submit.btn.btn-outline-success(type='submit' name='submitbtn') Submit
+    //
+      <input
+      class="submit"
+      type="button"
+      name="submitbtn"
+      onclick="validate()"
+      />
+    button.reset.btn.btn-danger(type='reset' name='reset')
+      | Reset
