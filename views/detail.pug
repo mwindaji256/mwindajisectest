@@ -1,5 +1,27 @@
 extends layout 
 block content
-
+    main#main(data-aos='fade-in')
+        // ======= Breadcrumbs =======
+        .breadcrumbs
+            .container
+            h2 Solo Artists
+        // End Breadcrumbs
+        body
+            section.text-light.p-5.p-lg-0.pt-lg-5.mt-5.mb-5.text-center.text-sm-start
+                .container
+                    .d-sm-flex.align-items-center.justify-content-between
+                    div
+                        h1
+                        span.text-warning  #{artist.username}
+                        p.lead.my-4
+                        | Names : #{artist.stagename}
+                        | Born: #{artist.dob}
+                        br
+                        | Number of Albums : #{artist.albums}
+                        br
+                        | Number of Songs: #{artist.songs}
+                        br
+                        | genre: #{artist.genre}
+                    img.img-fluid.w-50.mb-5.d-none.d-sm-block(src='/'+artist.uploadpicture width = "400px" height = "600px" alt='artist photo')
 
 

@@ -227,6 +227,9 @@ const validate_update = () => {
     const artistIDFormat = /^[a-z]{3}\d+[a-z]{3}/;
     const nationalIDFormat = /^[A-Z]{2}\d+[A-Z]{3}/;
 
+    // getting all forms
+    const elForms = [...document.getElementsByName('updateform')];
+
     if (username.value == '') {
         document.getElementById('name-error').style.display = 'block';
         document.getElementById('name-error').innerText =
