@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         var images = file.fieldname;
-        console.log(images);
+
         cb(null, file.fieldname + '-' + Date.now());
     },
 });
@@ -249,7 +249,7 @@ router.get('/register/artists', ensureAuthenticated, (req, res) => {
         req.flash('error_msg', 'Only for clerks');
         res.redirect('/users/login');
     } else {
-        res.render('admin-artist', {
+        res.render('admin', {
             user: { name: 'Odeke Trevor', age: 24 },
         });
     }
@@ -298,7 +298,7 @@ router.post('/register/artists', upload.single('image'), async (req, res) => {
 
     if (checkUser) {
 
-        console.log('User exists');
+        console.log('My user exists');
         req.flash('error_msg', 'This user exists');
         res.render('admin', {
             user: {
@@ -426,9 +426,28 @@ router.get('/delete/:id', async (req, res) => {
     res.redirect('/admin')
 })
 
+//Delete artist, new code
+router.post('/deleteartist', async (req, res) => {
+    if (req.session.user) {
+        try {
+            await RegisterArtist.deleteOne({ email: req.body.id });
+            await User.deleteOne({ email: req.body.id });
+            res.redirect('back');
+        } catch (err) {
+            res.send('You are unable to delete an artist ', err);
+        }
+    } else {
+        console.log('cant find session');
+        res.redirect('/login');
+    }
+});
+
+
+
 //Update an artist
 router.post('/update/:id', async (req, res) => {
     console.log(req.body)
+    //Comments from Grace, remove Nin, remove name and remove id
     const check = false
     var checkName = false
     var checkNin = false
@@ -495,9 +514,13 @@ router.post('/update/:id', async (req, res) => {
     console.log('Pass')
     //Udate after the form passes all the tests
     if (checkName && checkContact && checkNin && checkId) {
+        //Store the email before updating
+        const { email } = RegisterArtist.findOne({ _id: req.params.id })
+
         await RegisterArtist.findOneAndUpdate({ _id: req.params.id }, req.body)
             .then(data => {
                 console.log(data)
+
                 req.flash('success_msg', 'Successfully updated details');
                 res.redirect('/admin/artists')
             })
