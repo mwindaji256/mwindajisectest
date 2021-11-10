@@ -17,7 +17,7 @@ head
     .user-img{
     height: 100px;
     width: 100px;
-    }
+    } 
   
 #add_artist.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog.modal-lg
@@ -137,7 +137,7 @@ head
 
 
 include partials/messages.pug
-form.d-flex.search-artist(method='post' action='/admin/search')
+form.d-flex.search-artist
   input.form-control.me-2(type='search' placeholder='Search band' aria-label='Search' name='search')
   button.btn.btn-outline-success(type='submit')
     | Search 
@@ -165,7 +165,7 @@ table.table.table-hover
                     p Do you really want to delete this band ?
                     .modal-footer
                         button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                        a.btn.btn-danger(href='/delete/'+val._id type='button') Delete band  
+                        a.btn.btn-danger(href='/bands/delete/'+val._id type='button') Delete band  
     
     .modal.fade(id='view_band'+val._id tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
         .modal-dialog
@@ -252,10 +252,10 @@ table.table.table-hover
                                 .input-icons
                                 label(for='category-names') Choose a genre:
                                 select#category.input-field(name='category')
-                                    option(value='Reggae' selected ) Reggae
-                                    option(value='Rap') Rap
-                                    option(value='Pop') Pop
-                                    option(value='Jazz') Jazz
+                                    option(value='Reggae' selected=val.category=='Reggae') Reggae
+                                    option(value='Rap'  selected=val.category=='Rap' ) Rap
+                                    option(value='Pop'  selected=val.category=='Pop' ) Pop
+                                    option(value='Jazz'  selected=val.category=='Jazz' ) Jazz
                             if val.sponsors
                                 .col-6
                                     label(for='category-names') Name of sponsors:
@@ -282,7 +282,7 @@ table.table.table-hover
                                 i.fa.fa-user-circle.icon
                                 textarea#profile.input-field(name='profile' cols='23' rows='8') #{val.profile}
                         button.submit(type='submit' name='submitbtn') Submit
-
+  
                         
                         button.reset(type='reset' name='reset')
                             | Reset
