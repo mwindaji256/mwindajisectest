@@ -28,6 +28,79 @@ router.get('/artists', (req, res) => {
     });
 });
 
+router.get('/comedians', (req, res) => {
+
+    Comedian.find({}, function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+
+
+            res.render('admin_comedian', {
+                user: data,
+                moment: require('moment')
+            });
+            // console.log(data);
+        }
+    });
+});
+
+router.get('/bands', async (req, res) => {
+
+
+    try {
+        let users = await Band.find();
+        if (req.query.search) {
+            await Band.find({ bandname: req.query.search })
+                .then(data => {
+                    if (data.length == 0) {
+                        console.log('No users')
+                        req.flash(
+                            'error_msg',
+                            'Band does not exist'
+                        );
+                        res.redirect('/admin/bands')
+                    } else {
+                        users = data
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+        }
+        res.render('admin_band', {
+            user: users,
+            moment: require('moment')
+        });
+    } catch (err) {
+        console.log(err)
+    }
+});
+
+router.get('/comedians',async (req, res) => {
+
+    // Comedian.find({}, function (err, data) {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log(img);
+    //         res.render('admin_comedian', {
+    //             user: data,
+    //             moment: require('moment')
+    //         });
+    //         // console.log(data);
+    //     }
+    // });
+
+    let users = await Comedian.find({})
+
+    res.render('admin_comedian',{
+        user = users,
+        moment: require('moment')
+    })
+});
+
 router.post("/search", async (req, res) => {
     console.log(req.body)
     const findArtist = await RegisterArtist.find({})
