@@ -1,8 +1,8 @@
 if error_msg != ''
-  .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+  .alert.alert-warning.container.alert-dismissible.fade.show.mt-3.mb-3(role='alert')
     p #{ error_msg }
     button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
 if success_msg != ''
-  .alert.alert-success.alert-dismissible.fade.show(role='alert')
+  .alert.alert-success.container.alert-dismissible.fade.show.mt-3.mb-3(role='alert')
     p #{ success_msg }
     button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
