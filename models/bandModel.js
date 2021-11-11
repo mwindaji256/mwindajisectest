@@ -70,9 +70,10 @@ const BandSchema = new Schema({
         type: String,
         default: 'password',
     },
+    profile: {
+        type: String,
+    },
 });
-
-
 
 const BandModel = mongoose.model('bands', BandSchema);
 module.exports = BandModel;
