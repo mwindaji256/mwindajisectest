@@ -1,5 +1,26 @@
 extends layout 
 block content
+  style.
+    .advanced {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    }
+    .btn-secondary,
+    .btn-secondary:focus,
+    .btn-secondary:active {
+    color: #fff;
+    background-color: darkorange !important;
+    border-color: darkorange !important;
+    box-shadow: none;
+    }
+    .advanced {
+    color: darkorange !important;
+    }
+    .form-control:focus {
+    box-shadow: none;
+    border: 1px solid darkorange;
+    }
   main#main(data-aos='fade-in')
     // ======= Breadcrumbs =======
     .breadcrumbs
@@ -7,38 +28,48 @@ block content
         h2 Solo Artists
     // End Breadcrumbs
     section#bands.bands
-      .col-md-5.container.mb-5
-        form.d-flex.search-artist(method='post' action='/artistinfo/list')
-              select#filter.form-select(aria-label='Default select example' name='filter')
-                option(selected='' value='Name') Name
-                option(value='Gender') Gender
-                option(value='Home') Home
-                option(value='Albums') Albums
-                option(value='Songs') Songs
-              input.form-control.me-2(type='search' placeholder='Search for your artist' aria-label='Search' name='stagename')
-              button.btn.btn-warning(type='submit')
-                | Search 
-      .container(data-aos='fade-up')
-        .row.g-4(data-aos='zoom-in' data-aos-delay='100')
-          if user.length
-          each val in user
-              .col-md-6.col-lg-3
-                  .card 
-                      .card-body.text-center
-                          a(href='/artist/'+val._id)
-                              img.img-fluid.mb-3(src=val.img alt='' style='height: 300px; width: 250px')
-                          h3.card-title.mb-3.text-dark #{val.username}
-                          .card-content
-                              p
-                              | #{val.profile}
-                              .social
-                              a(href='')
-                                  i.bi.bi-twitter
-                              a(href='')
-                                  i.bi.bi-facebook
-                              a(href='')
-                                  i.bi.bi-instagram
-                              a(href='')
-                                  i.bi.bi-linkedin
+      form(method='post' action='/artists')
+        .container
+          .row.d-flex.justify-content-center
+            .col-md-10  
+              
+                .row.g-3.mt-2
+                  .col-md-3
+                    .dropdown
+                      select#dropdownMenuButton1.btn.btn-secondary.form-select(type='button' data-bs-toggle='dropdown' aria-expanded='false' name='filter')
+                        option(selected='' value='Name')
+                          | Name 
+                        option(value='Genre') Genre
+                        option(value='Home') Home
+                        option(value='Albums')
+                          | Albums
+                        option(value='Songs') Songs
+                  .col-md-6
+                    input.form-control(type='text' placeholder='Search artists' name='search')
+                  .col-md-3
+                    button.btn.btn-secondary.btn-block(type='submit')
+                      | Search Results  
+            .container.mt-3(data-aos='fade-up')
+              .row.g-4(data-aos='zoom-in' data-aos-delay='100')
+                if user.length
+                each val in user
+                    .col-md-6.col-lg-3
+                        .card 
+                            .card-body.text-center
+                                a(href='/artist/'+val._id)
+                                    img.img-fluid.mb-3(src=val.img alt='' style='height: 300px; width: 250px')
+                                h3.card-title.mb-3.text-dark #{val.username}
+                                .card-content
+                                    p
+                                    | #{val.profile}
+                                    .social
+                                    a(href='')
+                                        i.bi.bi-twitter
+                                    a(href='')
+                                        i.bi.bi-facebook
+                                    a(href='')
+                                        i.bi.bi-instagram
+                                    a(href='')
+                                        i.bi.bi-linkedin
 
 
