@@ -7,6 +7,10 @@ const ComedianSchema = new Schema({
         type: String,
         required: [true, 'The username is needed'],
     },
+    stagename: {
+        type: String,
+        required: [true, 'Stage is required'],
+    },
     profile: {
         type: String,
         required: [true, 'The profile is needed'],
