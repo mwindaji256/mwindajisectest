@@ -73,6 +73,9 @@ const BandSchema = new Schema({
     profile: {
         type: String,
     },
+    crowns: {
+        type: String,
+    },
 });
 
 const BandModel = mongoose.model('bands', BandSchema);
