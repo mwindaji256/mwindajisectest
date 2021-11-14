@@ -15,8 +15,8 @@ router.get('/login', (req, res) => {
 //Login Handle
 router.post('/login', async (req, res, next) => {
 
-    const artist = await Users.findOne({ email: req.body.email })
-    if (artist) {
+    const user = await Users.findOne({ email: req.body.email })
+    if (user) {
 
         await Users.findOne({ email: req.body.email })
             .exec()
@@ -32,7 +32,7 @@ router.post('/login', async (req, res, next) => {
                         })(req, res, next);
                     } else if (data.role == "admin") {
                         passport.authenticate('local', {
-                            successRedirect: '/register/artists',
+                            successRedirect: '/admin/artists',
                             failureRedirect: '/users/login',
                             failureFlash: true,
                         })(req, res, next);
@@ -51,6 +51,7 @@ router.post('/login', async (req, res, next) => {
                     }
                 } else {
                     console.log('Nothing')
+
                 }
             })
             .catch(err => {
@@ -62,6 +63,25 @@ router.post('/login', async (req, res, next) => {
         res.redirect('/users/login')
     }
     console.log('Unable')
+})
+
+//Updating passwords
+router.post('/password_update/:email', (req, res) => {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password1, salt, async (err, hash) => {
+            if (err) throw err;
+            Users.findOneAndUpdate({ email: req.params.email }, { password: hash })
+                .then(data => {
+                    console.log(data)
+                    req.flash('error_msg', 'Login with new password')
+                    res.redirect('/users/login')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })
+    })
+
 })
 
 //logout
