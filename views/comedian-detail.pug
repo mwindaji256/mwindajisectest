@@ -1,0 +1,248 @@
+doctype html
+head
+  style(type='text/css').
+    .main-body {
+    padding: 15px;
+    }
+    .profile {
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    }
+    .card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+    .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    }
+    .card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+    }
+    .gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+    }
+    .gutters-sm > .col,
+    .gutters-sm > [class*='col-'] {
+    padding-right: 8px;
+    padding-left: 8px;
+    }
+    .mb-3,
+    .my-3 {
+    margin-bottom: 1rem !important;
+    }
+    .bg-gray-300 {
+    background-color: #e2e8f0;
+    }
+    .h-100 {
+    height: 100% !important;
+    }
+    .shadow-none {
+    box-shadow: none !important;
+    }
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU' crossorigin='anonymous')
+  // JavaScript Bundle with Popper
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ' crossorigin='anonymous')
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Document
+ 
+  meta(charset='utf-8')
+  meta(content='width=device-width, initial-scale=1.0' name='viewport')
+  title Solo artists
+  meta(content='' name='description')
+  meta(content='' name='keywords')
+  // Favicons
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='assets/vendor/aos/aos.css' rel='stylesheet')
+  link(href='assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+
+  link(href='/assets/css/style.css' rel='stylesheet')
+  title Document
+
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='index.html') UGAAMUX
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li
+          a(href='/admin') Home
+        li
+          a(href='/admin') Artists
+        li  
+          a(href='/admin/bands') Bands
+        li
+          a(href='/admin/comedians') Comedians
+
+
+// End Header 
+
+#exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title
+          | Update details
+        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+      .modal-body
+        form.row.g-3(method='POST' name='registration' action='/comedians/update/'+user._id) 
+          .col-md-6  
+            label.form-label(for='inputEmail4') Stage name
+            input#inputEmail4.form-control(name='bandname' type='text' value=user.stagename)
+          .col-md-6
+            label.form-label(for='inputPassword4') Area based
+            input#inputNumber4.form-control(name='area' type='text' value=user.area) 
+          .col-12
+            button.btn.btn-primary(type='submit')
+              | Update
+      .modal-footer
+        button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
+          | Close
+
+#passwordModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header 
+        h5#exampleModalLabel.modal-title
+          | Change password
+        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+      .modal-body
+        form.row.g-3(name='passwordChange' method='post' onsubmit='return validate()' action='/comedians/password_update/'+user.email) 
+          .col-md-6  
+            label.form-label(for='inputEmail4') Enter password 
+            input#inputPassword4.form-control(name='password1' type='password')
+            p#password1-error(style='display: none') 
+          .col-md-6
+            label.form-label(for='inputPassword4') Re-enter password
+            input#inputPassword3.form-control(name='password2' type='password') 
+            p#password2-error(style='display: none')
+          .col-12
+            button.btn.btn-primary(type='submit' name="submitbtn")
+              | Update
+      .modal-footer
+        button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
+          | Close    
+include partials/messages.pug
+    section#bands.bands
+      .container(data-aos='fade-up')
+        .row.g-4(data-aos='zoom-in' data-aos-delay='100')
+          
+            section.p-5.p-lg-0.pt-lg-5.mt-3.mb-5.text-center.text-sm-start
+                .container
+                    .d-sm-flex.align-items-center.justify-content-between
+                    div
+                        h1
+                        span.h3.text-warning  #{user.stagename}
+                        .card.pb-4.ml-4
+                          p.lead.my-4
+                          h5| Profile : #{user.profile}
+  
+                          h5| Location : #{user.location}
+                        
+                          | Profile: #{user.profile}
+                          br
+                          | Gender: #{user.gender}
+                    img.img-fluid.w-50.mb-5.d-none.d-sm-block.pt-3(src=user.img style="width = 300px height = 400px" alt='artist photo')
+
+// ======= Footer =======
+footer#footer
+  .footer-top
+    .container
+      .row
+        .col-lg-4.col-md-6.footer-contact
+          h3 Ugaamux
+          p
+            | Bukoto Block 66 
+            br
+            |               Kampala
+            br
+            |               Uganda 
+            br
+            br
+            strong Phone:
+            |  +256 755895088
+            br
+            strong Email: 
+            |  info@ugaamux.com
+            br
+        .col-lg-4.col-md-6.footer-links
+          h4 Useful Links
+          ul
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Home
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Solo Artists
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Bands
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Music Labels
+            li
+              i.bx.bx-chevron-right
+              a(href='#') Contact us
+        .col-lg-4.col-md-6.footer-newsletter
+          h4 Join Our Newsletter
+          p Want to receive updates from Ugaamux, Join our Newsletter
+          form(action='' method='post')
+            input(type='email' name='email')
+            input(type='submit' value='Subscribe')
+  .container.d-md-flex.py-4
+    .me-md-auto.text-center.text-md-start
+      .copyright
+        | &copy; Copyright 
+        strong
+          span Ugaamux
+        | . All Rights Reserved
+      .credits
+        | Designed by Odeke Trevor
+    .social-links.text-center.text-md-right.pt-3.pt-md-0
+      a.twitter(href='#')
+        i.bx.bxl-twitter
+      a.facebook(href='#')
+        i.bx.bxl-facebook
+      a.instagram(href='#')
+        i.bx.bxl-instagram
+      a.google-plus(href='#')
+        i.bx.bxl-skype
+      a.linkedin(href='#')
+        i.bx.bxl-linkedin
+// End Footer
+#preloader
+a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
+  i.bi.bi-arrow-up-short
+// Vendor JS Files
+script(src='/assets/vendor/aos/aos.js')
+script(src='/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='/assets/vendor/php-email-form/validate.js')
+script(src='/assets/vendor/purecounter/purecounter.js')
+script(src='/assets/vendor/swiper/swiper-bundle.min.js')
+// Template Main JS File
+script(src='/assets/js/main.js')
