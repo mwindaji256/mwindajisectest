@@ -24,10 +24,6 @@ const BandSchema = new Schema({
         type: String,
         required: [true, 'The category is needed'],
     },
-    bandid: {
-        type: String,
-        required: true,
-    },
     albums: {
         type: Number,
         required: true,
@@ -48,16 +44,13 @@ const BandSchema = new Schema({
         type: String,
         required: true,
     },
-    role: {
-        type: String,
-        default: 'band',
-    },
     email: {
         type: String,
         required: true,
     },
     members: {
         type: Number,
+        required: true,
     },
     // img: {
     //     data: Buffer,
@@ -65,10 +58,6 @@ const BandSchema = new Schema({
     // },
     sponsors: {
         type: String,
-    },
-    password: {
-        type: String,
-        default: 'password',
     },
     profile: {
         type: String,
