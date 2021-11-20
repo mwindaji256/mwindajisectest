@@ -3,7 +3,8 @@ module.exports = {
         if (req.isAuthenticated()) {
             return next();
         }
-        req.flash('err_msg', 'Please login to view this resource')
+        //Redirect users who havent logged in to the login form with a message
+        req.flash('error_msg', 'Please login to view this resource')
         res.redirect('/users/login')
     }
 }
