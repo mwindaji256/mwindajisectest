@@ -9,7 +9,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
     res.render('welcome');
 });
 
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
+router.get('/artistacc', ensureAuthenticated, (req, res) => {
 
     Artist.findOne({ email: req.user.email })
         .then(data => {
@@ -61,16 +61,35 @@ router.get('/comedianacc', ensureAuthenticated, (req, res) => {
 });
 
 router.post('/update/:id', async (req, res) => {
-    console.log(req.body)
-    await Artist.findOneAndUpdate({ _id: req.params.id }, req.body)
+    var pass = false;
+    const name = Artist.findOne({ stagename: req.body.stagename })
+    //Check if the stagename already exists
+    await Artist.findOne({ _id: req.params.id })
         .then(data => {
-            console.log(data)
-            req.flash('success_msg', 'Successfully updated details');
-            res.redirect('/test/dashboard')
-        })
-        .catch(err => {
+            if (data.stagename == req.body.stagename) {
+                pass = true;
+            } else if (name) {
+                req.flash('error_msg', 'Stagename already exists');
+                res.redirect('/profile/artistacc')
+            } else {
+                pass = true
+            }
+        }).catch(err => {
             console.log(err)
         })
+
+    if (pass) {
+        Artist.findOneAndUpdate({ _id: req.params.id }, req.body)
+            .then(data => {
+
+                req.flash('success_msg', 'Successfully updated details');
+                res.redirect('/profile/artistacc')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
 })
 
 

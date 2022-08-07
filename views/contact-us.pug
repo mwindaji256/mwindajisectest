@@ -38,17 +38,17 @@ header#header.fixed-top
     nav#navbar.navbar.order-last.order-lg-0
       ul
         li
-          a.active(href='index.html') Home
+          a(href='/') Home
         li
-          a(href='solo.html') Solo Artists
+          a(href='/artists') Artists
         li
-          a(href='band.html') Bands
+          a(href='/bands') Bands
         li
-          a(href='labels.html') Labels
+          a(href='/comedians') Comedians
         li
           a(href='about.html') About Us
         li
-          a(href='contact.html') Contact
+          a.active(href='contact.html') Contact
       i.bi.bi-list.mobile-nav-toggle
     // .navbar
     a.account-btn(href='account.html') Account
@@ -92,10 +92,11 @@ main#main
             .form-group.mt-3
               input#subject.form-control(type='text' name='subject' placeholder='Subject')
               p#subject-error(style='display: none;')
-            .form-group.mt-3
-              textarea.form-control(name='message' rows='5' placeholder='Message')
-              p#message-error(style='display: none;')
-              button(type='submit') Send Message
+            .mt-3  
+              .form-group.mt-3
+                textarea.form-control(name='message' rows='5' placeholder='Message')
+                p#message-error(style='display: none;')
+                button.btn.btn.btn-block(type='submit' style=' background-color: darkorange; color: white;') Send Message
   // End Contact Section
 // End #main
 // ======= Footer =======

@@ -54,10 +54,52 @@ head
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU' crossorigin='anonymous')
   // JavaScript Bundle with Popper
   script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ' crossorigin='anonymous')
+  script(src='/javascript/password.js')
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Document
+ 
+  //Favicons
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
+
+  link(href='/assets/css/style.css' rel='stylesheet')
+  title Document
+
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='index.html') UGAAMUX
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li
+          a(href='/admin') Home
+        li
+          a(href='/admin') Artists
+        li  
+          a(href='/admin/bands') Bands
+        li
+          a(href='/admin/comedians') Comedians
+
+      i.bi.bi-list.mobile-nav-toggle
+    // .navbar
+    a.account-btn(href='/users/logout') Log out
+// End Header 
 
 #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog
@@ -67,13 +109,15 @@ head
           | Update details
         button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
       .modal-body
-        form.row.g-3(method='POST' name='registration' action='/bands/update/'+user._id) 
-          .col-md-6 
-            label.form-label(for='inputEmail4') Bandname
-            input#inputEmail4.form-control(name='bandname' type='text' value=user.bandname)
+        form.row.g-3(method='POST' name='updatecomedian' action='/comedians/update/'+user._id onsubmit='return checkComedian()') 
+          .col-md-6    
+            label.form-label(for='inputEmail4') Stage name
+            input#inputEmail4.form-control(name='stagename' type='text' value=user.stagename)
+            small#stagename-error(style='display: none') 
           .col-md-6
-            label.form-label(for='inputPassword4') No. of members
-            input#inputNumber4.form-control(name='members' type='number' value=user.members) 
+            label.form-label(for='inputPassword4') Area based
+            input#inputNumber4.form-control(name='area' type='text' value=user.area) 
+            small#area-error(style='display: none') 
           .col-12
             button.btn.btn-primary(type='submit')
               | Update
@@ -81,73 +125,56 @@ head
         button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
           | Close
 
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
-  .container-fluid
-    a.navbar-brand(href='/')
-      span.yellow
-        b UGA
-      span.red AMAX
-    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
-      span.navbar-toggler-icon
-    .info-nav
-      #navbarSupportedContent.collapse.navbar-collapse.navinfo
-        ul.navbar-nav.me-auto.mb-2.mb-lg-0
-          //
-            <li class="nav-item">
-            <a
-            class="nav-link active"
-            aria-current="page"
-            href="#"
-            >Home</a
-            >
-            </li>
-          li.nav-item
-            a.nav-link(href='artists.html') Artists
-          li.nav-item
-            a.nav-link(href='comedian.html') Comedians
-          li.nav-item
-            a.nav-link(href='band.html') Bands
-          li.nav-item
-            a.nav-link(href='contact.html') Contact Us
-          li.nav-item
-            a.nav-link(href='about.html') About Us
-          li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle.btn.btn-outline-secondary(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
-              | Account
-            ul.dropdown-menu(aria-labelledby='navbarDropdown')
-              li
-                a.dropdown-item(href='/users/logout') Logout
-        //
-          <form class="d-flex">
-          <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">
-          Search
-          </button>
-          </form>
-include partials/messages.pug
-.profile
+#passwordModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header 
+        h5#exampleModalLabel.modal-title
+          | Change password
+        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+      .modal-body
+        form.row.g-3(name='passwordChange' method='post' onsubmit='return validate()' action='/comedians/password_update/'+user.email) 
+          .col-md-6  
+            label.form-label(for='inputEmail4') Enter password 
+            input#inputPassword4.form-control(name='password1' type='password')
+            p#password1-error(style='display: none') 
+          .col-md-6
+            label.form-label(for='inputPassword4') Re-enter password
+            input#inputPassword3.form-control(name='password2' type='password') 
+            p#password2-error(style='display: none')
+          .col-12
+            button.btn.btn-primary(type='submit' name="submitbtn")
+              | Update
+      .modal-footer
+        button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
+          | Close    
+
+.profile.pt-5.mt-5
+  include partials/messages.pug
   .row.gutters-sm
     .col-md-4.mb-3
       .card
         .card-body
           .d-flex.flex-column.align-items-center.text-center
             
-            img.rounded-circle(src = user.img '#{user.img}' width='150')
+            img.rounded-circle(src = user.img '#{user.img}' width='220' height='220')
             .mt-3
               h4 #{user.username}
               p.text-secondary.mb-1(aria-placeholder='full names')
               .form-group
-                 a.btn.btn-primary(href='/users/logout' type='button')
+                 a.btn.btn-lg(href='/users/logout' type='button' style=' background-color: rgba(192, 61, 10, 0.938); color: white;')
                   | logout
   
     .col-md-8
       .card.mb-3
         .card-body
+          .row
+            .col-sm-3
+              h6.mb-0
+                b Stage name:
+            .col-sm-9.text-secondary
+              | #{user.stagename}
+          hr
           .row
             .col-sm-3
               h6.mb-0 
@@ -165,16 +192,24 @@ include partials/messages.pug
           .row
             .col-sm-3
               h6.mb-0
-                b Date started:
+                b NIN:
             .col-sm-9.text-secondary
-              | #{user.startdate}
-          hr 
+              | #{user.nin}
+          hr
           .row
             .col-sm-3
               h6.mb-0
-                b Profile:
+                b Date started:
             .col-sm-9.text-secondary
-              | #{user.profile}
+              | #{moment(user.startdate).format('DD/MM/YYYY')} 
+          hr
+          .row
+            .col-sm-3
+              h6.mb-0
+                b Date of birth:
+            .col-sm-9.text-secondary
+              | #{moment(user.dob).format('DD/MM/YYYY')} 
+
           hr
 
           .row
@@ -191,12 +226,22 @@ include partials/messages.pug
                 b ID:
             .col-sm-9.text-secondary
               | #{user.comedianid}
-          hr
-           
+          hr 
           .row
-            .d-grid.gap-2.col-3.mx-auto
-              button.btn.btn-primary.btn-lg.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal')
-                | Update
+            .col-sm-3
+              h6.mb-0
+                b Profile: 
+            .col-sm-9.text-secondary
+              | #{user.profile}
+          hr
+          .container 
+            .row
+              .d-grid.gap-2.col-3
+                button.btn.btn.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal' style=' background-color: darkorange; color: white;')
+                  | Update 
+              .d-grid.gap-2.col-4
+                button.btn.btn.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#passwordModal' style=' background-color: #e8742e; color: white;')
+                  | Change password
           br
           br
           br

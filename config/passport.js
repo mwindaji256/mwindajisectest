@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
 //Load User Model
-const User = require('../models/artistModel')
-const Clerk = require('../models/adminModel')
 const Users = require('../models/UserModel')
 
 module.exports = function (passport) {
@@ -13,6 +11,7 @@ module.exports = function (passport) {
             //Match User 
             const user = Users.findOne({ email: email })
 
+            //If the user exists
             if (user) {
                 user
                     .then(user => {
@@ -41,11 +40,12 @@ module.exports = function (passport) {
             }
         })
     )
-
+    //Serialize the user
     passport.serializeUser((user, done) => {
         done(null, user.id)
     });
 
+    //Deserialise the user
     passport.deserializeUser((id, done) => {
         Users.findById(id, function (err, user) {
             done(err, user)

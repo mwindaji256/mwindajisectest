@@ -14,17 +14,19 @@ const validate = () => {
     const location = document.registration.location;
     const nin = document.registration.nin;
 
+    const alphaNumeric = /^[a-zA-Z0-9]+$/;
     const id = /^[0-9a-zA-Z]+$/;
     const userName = /^[A-Za-z]+$/;
     const emailType = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const capital = /^[A-Z]+$/;
     const nationalIDFormat = /^[A-Z]{2}\d+[A-Z]{3}/;
     const systemIDFormat = /^[a-z]{3}\d+[a-z]{3}/;
+    const phoneFormat = /^\d{12}$/;
 
     if (username.value == '') {
         document.getElementById('name-error').style.display = 'block';
         document.getElementById('name-error').innerText =
-            'Please provide a username';
+            'Please provide a name';
         document.getElementById('name-error').style.color = 'red';
         username.focus();
         username.style.border = '2px solid red';
@@ -79,7 +81,15 @@ const validate = () => {
         stagename.focus();
         stagename.style.border = '2px solid red';
         return false;
-    } else {
+    } else if (!stagename.value.match(alphaNumeric)) {
+        document.getElementById('stage-error').style.display = 'block';
+        document.getElementById('stage-error').innerText =
+            'Stagename should be alphanumeric';
+        document.getElementById('stage-error').style.color = 'red';
+        stagename.focus();
+        stagename.style.border = '2px solid red';
+    }
+    else {
         stagename.style.border = '2px solid green';
         document.getElementById('stage-error').style.display = 'none';
     }
@@ -110,6 +120,19 @@ const validate = () => {
         return false;
     }
 
+    if (startdate.value == '') {
+        document.getElementById('startdate-error').style.display = 'block';
+        document.getElementById('startdate-error').innerText =
+            'Please provide a start date';
+        document.getElementById('startdate-error').style.color = 'red';
+        startdate.focus();
+        startdate.style.border = '2px solid red';
+        return false;
+    } else {
+        startdate.style.border = '2px solid green';
+        document.getElementById('startdate-error').style.display = 'none';
+    }
+
     if (area.value == '') {
         document.getElementById('area-error').style.display = 'block';
         document.getElementById('area-error').innerText =
@@ -121,6 +144,35 @@ const validate = () => {
     } else {
         area.style.border = '2px solid green';
         document.getElementById('area-error').style.display = 'none';
+    }
+
+
+    if (dob.value == '') {
+        document.getElementById('dob-error').style.display = 'block';
+        document.getElementById('dob-error').innerText =
+            'Please provide a date of birth';
+        document.getElementById('dob-error').style.color = 'red';
+        dob.focus();
+        dob.style.border = '2px solid red';
+        return false;
+    } else {
+        var birth = new Date(dob.value);
+        var start = new Date(startdate.value);
+        var checkDates = start - birth;
+
+        if (checkDates < 0) {
+            document.getElementById('dob-error').style.display = 'block';
+            document.getElementById('dob-error').innerText =
+                'Start date and date of birth conflicting';
+            document.getElementById('dob-error').style.color = 'red';
+            dob.focus();
+            startdate.style.border = '2px solid red';
+            dob.style.border = '2px solid red';
+            return false;
+        } else {
+            dob.style.border = '2px solid green';
+            document.getElementById('dob-error').style.display = 'none';
+        }
     }
 
     if (gender.value == '') {
@@ -172,10 +224,23 @@ const validate = () => {
         document.getElementById('location-error').style.display = 'none';
     }
 
+    if (albums.value == '') {
+        document.getElementById('albums-error').style.display = 'block';
+        document.getElementById('albums-error').innerText =
+            'Please provide your number of albums';
+        document.getElementById('albums-error').style.color = 'red';
+        albums.focus();
+        albums.style.border = '2px solid red';
+        return false;
+    } else {
+        albums.style.border = '2px solid green';
+        document.getElementById('albums-error').style.display = 'none';
+    }
+
     if (contact.value == '') {
         document.getElementById('contact-error').style.display = 'block';
         document.getElementById('contact-error').innerText =
-            'Please provide a profile';
+            'Please provide a contact';
         document.getElementById('contact-error').style.color = 'red';
         contact.focus();
         contact.style.border = '2px solid red';
@@ -185,18 +250,29 @@ const validate = () => {
         document.getElementById('contact-error').style.display = 'none';
     }
 
-    if (albums.value == '') {
-        document.getElementById('albums-error').style.display = 'block';
-        document.getElementById('albums-error').innerText =
-            'Please provide a username';
-        document.getElementById('albums-error').style.color = 'red';
-        albums.focus();
-        albums.style.border = '2px solid red';
+    if (artistid.value == '') {
+        document.getElementById('artistid-error').style.display = 'block';
+        document.getElementById('artistid-error').innerText =
+            'Please provide an artistid';
+        document.getElementById('artistid-error').style.color = 'red';
+        artistid.focus();
+        artistid.style.border = '2px solid red';
         return false;
-    } else {
-        albums.style.border = '2px solid green';
-        document.getElementById('albums-error').style.display = 'none';
+    } else if (!artistid.value.match(systemIDFormat)) {
+        document.getElementById('artistid-error').style.display = 'block';
+        document.getElementById('artistid-error').innerText =
+            'Please provide a valid artist id';
+        document.getElementById('artistid-error').style.color = 'red';
+        artistid.focus();
+        artistid.style.border = '2px solid red';
+        return false;
     }
+    else {
+        artistid.style.border = '2px solid green';
+        document.getElementById('artistid-error').style.display = 'none';
+    }
+
+
 
     if (profile.value == '') {
         document.getElementById('profile-error').style.display = 'block';
@@ -297,7 +373,7 @@ const validate_update = () => {
     if (area.value == '') {
         document.getElementById('area-error').style.display = 'block';
         document.getElementById('area-error').innerText =
-            'Please provide a stage name';
+            'Please provide an area';
         document.getElementById('area-error').style.color = 'red';
         area.focus();
         area.style.border = '2px solid red';
@@ -361,7 +437,7 @@ const validate_update = () => {
     if (artistid.value == '') {
         document.getElementById('artistid-error').style.display = 'block';
         document.getElementById('artistid-error').innerText =
-            'Please provide a profile';
+            'Please provide an artist id';
         document.getElementById('artistid-error').style.color = 'red';
         artistid.focus();
         artistid.style.border = '2px solid red';
@@ -378,7 +454,7 @@ const validate_update = () => {
         artistid.focus();
         document.getElementById('artistid-error').style.display = 'block';
         document.getElementById('artistid-error').innerText =
-            'Please provide a valid national id';
+            'Please provide a artist id';
         document.getElementById('artistid-error').style.color = 'red';
         artistid.style.border = '2px solid red';
         return false;
@@ -387,7 +463,7 @@ const validate_update = () => {
     if (albums.value == '') {
         document.getElementById('albums-error').style.display = 'block';
         document.getElementById('albums-error').innerText =
-            'Please provide a username';
+            'Please number of albums';
         document.getElementById('albums-error').style.color = 'red';
         albums.focus();
         albums.style.border = '2px solid red';

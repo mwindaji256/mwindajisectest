@@ -110,13 +110,15 @@ header#header.fixed-top
           | Update details 
         button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
       .modal-body
-        form.row.g-3(method='POST' name='registration' action='/bands/update/'+user._id) 
+        form.row.g-3(method='POST' name='updateband' action='/bands/update/'+user._id onsubmit="return checkBand()") 
           .col-md-6 
             label.form-label(for='inputEmail4') Bandname
             input#inputEmail4.form-control(name='bandname' type='text' value=user.bandname)
+            small#bandname-error(style='display: none') 
           .col-md-6
             label.form-label(for='inputPassword4') No. of members
             input#inputNumber4.form-control(name='members' type='number' value=user.members) 
+            small#members-error(style='display: none') 
           .col-12
             button.btn.btn-primary(type='submit')
               | Update
@@ -148,8 +150,9 @@ header#header.fixed-top
         button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
           | Close    
  
-include partials/messages.pug
+
 .profile.pt-5.mt-5
+  include partials/messages.pug
   .row.gutters-sm
     .col-md-4.mb-3
       .card
@@ -161,7 +164,7 @@ include partials/messages.pug
               h4 #{user.username}
               p.text-secondary.mb-1(aria-placeholder='full names')
               .form-group
-                 a.btn.btn(href='/users/logout' type='button' style=' background-color: darkorange; color: white;')
+                 a.btn.btn-lg(href='/users/logout' type='button' style=' background-color: rgba(192, 61, 10, 0.938); color: white;')
                   | logout
   
     .col-md-8
@@ -194,7 +197,14 @@ include partials/messages.pug
                 b Slogan:
             .col-sm-9.text-secondary
               | #{user.slogan}
-          
+          hr
+          .row
+            .col-sm-3
+              h6.mb-0
+                b Category:
+            .col-sm-9.text-secondary
+              | #{user.category}
+
             if user.sponsors
               hr
               .row
@@ -210,7 +220,13 @@ include partials/messages.pug
                 b Email:
             .col-sm-9.text-secondary
               | #{user.email}
- 
+          hr
+          .row
+            .col-sm-3
+              h6.mb-0
+                b Home:
+            .col-sm-9.text-secondary
+              | #{user.home}
           hr
           .row 
             .col-sm-3
@@ -229,10 +245,10 @@ include partials/messages.pug
           .container
             .row
               .d-grid.gap-2.col-3
-                button.btn.btn.btn-lg.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal' style=' background-color: darkorange; color: white;')
+                button.btn.btn.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal' style=' background-color: darkorange; color: white;')
                   | Update
               .d-grid.gap-2.col-4
-                button.btn.btn.btn-lg.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#passwordModal' style=' background-color: rgba(192, 61, 10, 0.938); color: white;')
+                button.btn.btn.btn-block(type='button' data-bs-toggle='modal' data-bs-target='#passwordModal' style=' background-color: #e8742e; color: white;')
                   | Change password
           br
           br

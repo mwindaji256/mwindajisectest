@@ -1,5 +1,11 @@
 doctype html
 head
+  script.
+    var today = new Date().toISOString().split('T')[0];
+    console.log(today)
+    document.getElementsByName("formation")[0].setAttribute('max', today);
+  script(src='/javascript/band.js')
+  link(rel='stylesheet' href='/css/admin.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous')
   script(src='/javascript/band.js')
@@ -9,7 +15,25 @@ head
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js' integrity='sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh' crossorigin='anonymous')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js' integrity='sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ' crossorigin='anonymous')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-  link(rel='stylesheet' href='/css/admin.css')
+
+
+  //Favicons
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
+  
+  link(href='/assets/css/style.css' rel='stylesheet')
+
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Document
@@ -18,7 +42,36 @@ head
     height: 100px;
     width: 100px;
     } 
-  
+
+    .breadcrumbs {
+    margin-top: 0px;
+    text-align: center;
+    background: darkorange;
+    padding: 30px 0;
+    color: #fff;
+    }
+
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='/') UGAAMUX
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li
+          a(href='/admin/artists') Artists
+        li  
+          a.active(href='/admin/bands') Bands
+        li 
+          a(href='/admin/comedians') Comedians
+
+      i.bi.bi-list.mobile-nav-toggle
+    // .navbar
+    a.account-btn(href='/users/logout') Log out
+// End Header 
+ 
 #add_artist.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog.modal-lg
     .modal-content
@@ -27,7 +80,7 @@ head
           | Register Band
         button.btn-close(type='button' data-dismiss='modal' aria-label='Close')
       .modal-body
-
+ 
         form(method='post' action='/bands/register' enctype='multipart/form-data' style='max-width: 600px; margin: auto' name='registration' onsubmit='return validate()')
             include partials/messages.pug
             h2 REGISTER BAND
@@ -53,7 +106,7 @@ head
             label(for='start') Owner:
             p#owner-error(style='display: none;')
             .input-icons
-                i.fa.fa-music.icon
+                i.fa.fa-user.icon
                 input.input-field(name='owner' type='text' placeholder='Odeke Trevor')
             label(for='start') Email:
             p#email-error(style='display: none;')
@@ -65,7 +118,7 @@ head
                     label(for='nin') Band home:
                     p#home-error(style='display: none;')
                     .input-icons
-                        i.fa.fa-user-circle.icon
+                        i.fa.fa-home.icon
                         input#nin.input-field(name='home' type='text' placeholder='Masaka')
                 .col-6
                     label(for='nin') Number of members:
@@ -77,14 +130,15 @@ head
                 .col-6
                     // <p>Date of birth</p>
                     label(for='start') Date of formation:
-                    input#start.input-field(type='date' name='formation' value='2018-07-22')
+                    p#startdate-error(style='display: none;')
+                    input#start.input-field(type='date' name='startdate' max='2021-11-18')
                 .col-6.user_gender 
                     | Names of sponsors: 
                     input#myCheck(type='checkbox' onclick='myFunction()')
                     // <p id="text" style="display:none">Checkbox is CHECKED!</p>
                     p#sponsors-error(style='display: none;')
                     #text.input-icons(style='display:none')
-                        i.fa.fa-location-arrow.icon
+                        i.fas.fa-donate.icon
                         input#location.input-field(name='sponsors' type='text' placeholder='Names of sponsors')
             .row
                 .col-6
@@ -97,7 +151,7 @@ head
                     label(for='nin') Number of albums :
                     p#albums-error(style='display: none;')
                     .input-icons
-                        i.fa.fa-location-arrow.icon
+                        i.fa.fa-headphones.icon
                         input#albums.input-field(name='albums' type='number' placeholder='3')
             .row
                 .col-6
@@ -112,37 +166,44 @@ head
                         input#bandimage.input-field(type='file' name='bandimage' accept='.jpg, .jpeg, .png')
             .row
                 .col-6
-                    label(for='album') Band ID:
-                    p#bandid-error(style='display: none;')
                     .input-icons
-                        i.fa.fa-id-badge.icon
-                        input#artist_id.input-field(name='bandid' type='text' placeholder='Artist ID')
+                    label(for='category-names') Choose a category:
+                    select#category.input-field(name='category')
+                        option(value='Reggae') Reggae
+                        option(value='Rap') Rap
+                        option(value='Pop') Pop
+                        option(value='Jazz') Jazz 
                 .col-6 
-                    label(for='start') Date started:
-                    // <p id="name-error" style="display: none;"></p>
-                    input#start.input-field(type='date' name='startdate' value='2018-07-22' min='2018-01-01' max='2018-12-31')
+                    .pt-2 
+                        label(for='album') Crowns:
+                         
+                        .input-icons
+                            i.fa.fa-solid.fa-crown.icon
+                            input#artist_id.input-field(name='crowns' type='text' placeholder='Crowns, if any')
             .row
-            .col-6
+                label(for='profile') Bio: 
+                p#profile-error(style='display: none;')
                 .input-icons
-                label(for='category-names') Choose a category:
-                select#category.input-field(name='category')
-                    option(value='Reggae') Reggae
-                    option(value='Rap') Rap
-                    option(value='Pop') Pop
-                    option(value='Jazz') Jazz
-            button.submit.btn.btn-outline-success(type='submit' name='submitbtn') Submit
+                    i.fa.fa-user-circle.icon
+                    textarea#profile.input-field(name='profile' cols='23' rows='8')
 
-            button.reset.btn.btn-danger(type='reset' name='reset')
-            | Reset
+            .row.pt-3.pb-2
+                .col-6
+                    button.btn.btn.btn-block.submit(type='submit' name='submitbtn' style=' background-color: darkorange; color: white; width: 300px') Submit
+                .col-6
+                    button.btn.btn.btn-block.reset(type='reset' name='reset' style=' background-color: red; color: white; width: 280px') Reset
 
-
-include partials/messages.pug
-form.d-flex.search-artist
+ 
+.container.d-flex.pt-5.mt-5.justify-content-center.breadcrumbs
+    b BANDS
+form.d-flex.search-artist.container.pt-3
   input.form-control.me-2(type='search' placeholder='Search band' aria-label='Search' name='search')
   button.btn.btn-outline-success(type='submit')
     | Search 
-button.btn.btn-primary(type='button' data-toggle='modal' data-target='#add_artist') Add band  
-table.table.table-hover
+.container
+    button.btn.btn-lg.mt-3(type='button' data-toggle='modal' data-target='#add_artist' style=' background-color: darkorange; color: white;') Add band +
+include partials/messages.pug
+table.table.table-hover.container
   thead
     tr 
       th(scope='col') #
@@ -152,14 +213,15 @@ table.table.table-hover
       th(scope='col') Members
       th(scope='col') Owner
       th(scope='col') Actions
+  - var n = 0;
   each val in user 
-    
+    -n++
     //- #delete_artist.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
     .modal.fade(id='delete_band'+val._id tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
         .modal-dialog 
             .modal-content 
                 .modal-header 
-                    h5#exampleModalLabel.modal-title Delete Band
+                    h5#exampleModalLabel.modal-title Delete #{val.bandname}
                     button.btn-close(type='button' data-dismiss='modal' aria-label='Close')
                 .modal-body
                     p Do you really want to delete this band ?
@@ -168,48 +230,54 @@ table.table.table-hover
                         a.btn.btn-danger(href='/bands/delete/'+val._id type='button') Delete band  
     
     .modal.fade(id='view_band'+val._id tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
-        .modal-dialog
+        .modal-dialog.modal-lg
             .modal-content
                 .modal-header
                     h5#exampleModalLabel.modal-title View Band
                     button.btn-close(type='button' data-dismiss='modal' aria-label='Close')
                 .modal-body
                     .row
-                        img.rounded.float-start(src=val.bandimage alt='image' style='height: 250px; width: 250px;')
+                        .form-group.col-md-6
+                            //- b Band image
+                            img.rounded.float-start(src=val.bandimage alt='image' style='height: 250px; width: 250px;')
+                        .form-group.col-md-6
+                            //- b Band icon
+                            //- img.rounded.float-start(src=val.bandicon alt='image' style='height: 250px; width: 250px;')
                     .row
                         .form-group.col-md-6
-                            label(for='fname')  Band name
+                            b Band name
                             p #{val.bandname}
                         .form-group.col-6
-                            label(for='lname') Owner
+                            b Owner
                             p #{val.owner}
                     .row
                         .form-group.col-md-6
-                            label(for='name') Email
+                            b Email
                             p #{val.email}
                         .form-group.col-6
-                            label(for='user_name') Location
+                            b Location
                             p #{val.location}
                     .row
                         .form-group.col-md-6
-                            label(for='profile') Profile
-                            p #{val.profile}
+            
+                            b Genre
+                            p #{val.category}
                         .form-group.col-md-6
-                            label(for='dob') DOB
+                            b DOB
                             p #{moment(val.dob).format('DD/MM/YYYY')} 
                             
                     .row  
                         .form-group.col-md-6
-                            label(for='password') Area based
+                            b Area based
                             p Soroti
                         .form-group.col-md-6
-                            label(for='password') Date started
+                            b Date started
                             p #{moment(val.datestarted).format('DD/MM/YYYY')}
                     .row
                         .form-group.col-md-6
-                            .form-group.col-16
-                            label(for='fileToUpload') Genre
-                            p #{val.category}
+                            b Profile
+                            p #{val.profile}
+
                 .modal-footer 
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
                     button.btn.btn-danger(type='button') Delete band
@@ -221,9 +289,9 @@ table.table.table-hover
                     h4.modal-title Edit Band
                 .modal-body
                     form.artist-form(method='post' action='/bands/admin-update/'+val._id style='max-width: 600px; margin: auto' name='updateform')
-                        h2(style='color: black;') UPDATE BAND
+                
                         .row   
-                            img.rounded.mx-auto.d-block.edit-image(src=val.bandimage alt='image')
+                            img.rounded.mx-auto.d-block.edit-image(src=val.bandimage alt='image' style='height: 300px; width: 400px;')
                             label(for='start') Band name:
                             p#name-error(style='display: none;')
                             .input-icons
@@ -257,7 +325,7 @@ table.table.table-hover
                                     option(value='Pop'  selected=val.category=='Pop' ) Pop
                                     option(value='Jazz'  selected=val.category=='Jazz' ) Jazz
                             if val.sponsors
-                                .col-6
+                                .col-6.pt-2
                                     label(for='category-names') Name of sponsors:
 
                                     // <p id="text" style="display:none">Checkbox is CHECKED!</p>
@@ -265,15 +333,16 @@ table.table.table-hover
                                     .input-icons
                                         i.fa.fa-location-arrow.icon
                                         input#location.input-field(name='sponsors' type='text' placeholder='Names of sponsors' value=val.sponsors)
-                            else 
-                                .col-6.user_gender 
-                                    | Names of sponsors: 
-                                    input#myCheck(type='checkbox' name="element1")
+                            else  
+                                
+                                .col-6.pt-2
+                                    label(for='category-names') Name of sponsors:
+
                                     // <p id="text" style="display:none">Checkbox is CHECKED!</p>
-                                    p#sponsors-error(style='display: none;')
-                                    #text.input-icons(style='display:none')
+             
+                                    .input-icons
                                         i.fa.fa-location-arrow.icon
-                                        input#location.input-field(name='sponsors' type='text' placeholder='Names of sponsors')
+                                        input#location.input-field(name='sponsors' type='text' placeholder='Names of sponsors, if any ..')
 
                         .row
                             label(for='profile') Bio:
@@ -281,18 +350,18 @@ table.table.table-hover
                             .input-icons
                                 i.fa.fa-user-circle.icon
                                 textarea#profile.input-field(name='profile' cols='23' rows='8') #{val.profile}
-                        button.submit(type='submit' name='submitbtn') Submit
-  
-                        
-                        button.reset(type='reset' name='reset')
-                            | Reset
+                        .row.pt-3.pb-2
+                            .col-6
+                                button.btn.btn.btn-block.col-12.submit(type='submit' name='submitbtn' style=' background-color: darkorange; color: white;') Submit
+                            .col-6
+                                button.btn.btn.btn-block.col-12.reset(type='reset' name='reset' style=' background-color: red; color: white;') Reset
                     .modal-footer
                         button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                        button.btn.btn-primary(type='button') Save changes
+
      
     tbody
-        tr
-        th(scope='row') 1
+        tr 
+        th(scope='row')=n
         td
             img.user-img(src=val.bandimage alt='')
         td #{val.bandname}
@@ -300,7 +369,8 @@ table.table.table-hover
         td #{val.members}
         td #{val.owner}
         td
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#edit_band' + val._id) Edit
-            button.btn.btn-danger(type='button' data-toggle='modal' data-target='#delete_band'+ val._id) Delete
-            button.btn.btn-success(type='button' data-toggle='modal' data-target='#view_band'+ val._id) View
+            button.btn.btn.action_btn(type='button' data-toggle='modal' data-target='#view_band'+ val._id style=' background-color: #1a494d; color: white;') View
+            button.btn.btn.action_btn(type='button' data-toggle='modal' data-target='#edit_band' + val._id style=' background-color: #df9d10; color: white;') Edit
+            button.btn.btn-danger.action_btn(type='button' data-toggle='modal' data-target='#delete_band'+ val._id) Delete
+
  

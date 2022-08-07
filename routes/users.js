@@ -25,7 +25,7 @@ router.post('/login', async (req, res, next) => {
                     console.log(data.role)
                     if (data.role == "artist") {
                         passport.authenticate('local', {
-                            successRedirect: '/test/dashboard',
+                            successRedirect: '/profile/artistacc',
                             failureRedirect: '/users/login',
                             failureFlash: true,
 
@@ -38,13 +38,13 @@ router.post('/login', async (req, res, next) => {
                         })(req, res, next);
                     } else if (data.role == "band") {
                         passport.authenticate('local', {
-                            successRedirect: '/test/bandaccount',
+                            successRedirect: '/profile/bandaccount',
                             failureRedirect: '/users/login',
                             failureFlash: true,
                         })(req, res, next);
                     } else if (data.role == "comedian") {
                         passport.authenticate('local', {
-                            successRedirect: '/test/comedianacc',
+                            successRedirect: '/profile/comedianacc',
                             failureRedirect: '/users/login',
                             failureFlash: true,
                         })(req, res, next);

@@ -6,6 +6,7 @@ const validate = () => {
     const dob = document.registration.dob;
     const gender = document.registration.gender;
     const albums = document.registration.albums;
+    const stagename = document.registration.stagename;
     const contact = document.registration.contact;
     const comedianid = document.registration.comedianid;
     const img = document.registration.image;
@@ -14,6 +15,7 @@ const validate = () => {
     const location = document.registration.location;
     const nin = document.registration.nin;
 
+    const alphaNumeric = /^[a-zA-Z0-9]+$/;
     const id = /^[0-9a-zA-Z]+$/;
     const userName = /^[A-Za-z]+$/;
     const emailType = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -71,7 +73,38 @@ const validate = () => {
     }
     console.log(check);
 
-
+    if (stagename.value == '') {
+        document.getElementById('stagename-error').style.display = 'block';
+        document.getElementById('stagename-error').innerText =
+            'Please provide a stagename';
+        document.getElementById('stagename-error').style.color = 'red';
+        stagename.focus();
+        stagename.style.border = '2px solid red';
+        return false;
+    } else {
+        stagename.style.border = '2px solid green';
+        document.getElementById('stagename-error').style.display = 'none';
+    }
+    if (stagename.value.length < 2) {
+        document.getElementById('stagename-error').style.display = 'block';
+        document.getElementById('stagename-error').innerText =
+            'Name should be longer than one character';
+        document.getElementById('stagename-error').style.color = 'red';
+        stagename.focus();
+        stagename.style.border = '2px solid red';
+        return false;
+    } else if (!stagename.value.match(alphaNumeric)) {
+        document.getElementById('stagename-error').style.display = 'block';
+        document.getElementById('stagename-error').innerText =
+            'Stagename should be alphanumeric';
+        document.getElementById('stagename-error').style.color = 'red';
+        stagename.focus();
+        stagename.style.border = '2px solid red';
+        return false;
+    } else {
+        stagename.style.border = '2px solid green';
+        document.getElementById('stagename-error').style.display = 'none';
+    }
 
     if (email.value == '') {
         document.getElementById('email-error').style.display = 'block';
@@ -99,17 +132,67 @@ const validate = () => {
         return false;
     }
 
+    if (startdate.value == '') {
+        document.getElementById('startdate-error').style.display = 'block';
+        document.getElementById('startdate-error').innerText =
+            'Please provide a start date';
+        document.getElementById('startdate-error').style.color = 'red';
+        startdate.focus();
+        startdate.style.border = '2px solid red';
+        return false;
+    } else {
+        startdate.style.border = '2px solid green';
+        document.getElementById('startdate-error').style.display = 'none';
+    }
+
     if (area.value == '') {
         document.getElementById('area-error').style.display = 'block';
         document.getElementById('area-error').innerText =
-            'Please provide a stage name';
+            'Please provide an area';
         document.getElementById('area-error').style.color = 'red';
         area.focus();
         area.style.border = '2px solid red';
         return false;
-    } else {
+    } else if (!area.value.match(userName)) {
+        document.getElementById('area-error').style.display = 'block';
+        document.getElementById('area-error').innerText =
+            'Area should only contain letters';
+        document.getElementById('area-error').style.color = 'red';
+        area.focus();
+        area.style.border = '2px solid red';
+        return false;
+    }
+    else {
         area.style.border = '2px solid green';
         document.getElementById('area-error').style.display = 'none';
+    }
+
+    if (dob.value == '') {
+        document.getElementById('dob-error').style.display = 'block';
+        document.getElementById('dob-error').innerText =
+            'Please provide a date of birth';
+        document.getElementById('dob-error').style.color = 'red';
+        dob.focus();
+        dob.style.border = '2px solid red';
+        return false;
+    } else {
+
+        var birth = new Date(dob.value);
+        var start = new Date(startdate.value);
+        var checkDates = start - birth;
+        if (checkDates < 0) {
+            document.getElementById('dob-error').style.display = 'block';
+            document.getElementById('dob-error').innerText =
+                'Start date and date of birth conflicting';
+            document.getElementById('dob-error').style.color = 'red';
+            dob.focus();
+            startdate.style.border = '2px solid red';
+            dob.style.border = '2px solid red';
+            return false;
+        } else {
+            dob.style.border = '2px solid green';
+            document.getElementById('dob-error').style.display = 'none';
+        }
     }
 
     if (gender.value == '') {
@@ -152,6 +235,14 @@ const validate = () => {
         document.getElementById('location-error').style.display = 'block';
         document.getElementById('location-error').innerText =
             'Please provide a location';
+        document.getElementById('location-error').style.color = 'red';
+        location.focus();
+        location.style.border = '2px solid red';
+        return false;
+    } else if (!location.value.match(userName)) {
+        document.getElementById('location-error').style.display = 'block';
+        document.getElementById('location-error').innerText =
+            'Location should only contain letters';
         document.getElementById('location-error').style.color = 'red';
         location.focus();
         location.style.border = '2px solid red';

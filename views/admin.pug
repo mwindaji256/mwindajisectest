@@ -1,35 +1,93 @@
-doctype html
 head
+  style. 
+    .user-img{
+    height: 100px;
+    width: 100px;
+    }
+
+    .breadcrumbs {
+    margin-top: 0px;
+    text-align: center;
+    background: darkorange;
+    padding: 30px 0;
+    color: #fff;
+    }
+
+    .edit-image {
+    height: 200px;
+    width: 250px;
+    border-radius: 30px;
+    }
+ 
+    .action_btns{
+        padding-left:10px;
+    }
+  link(rel='stylesheet' href='/css/admin.css')
+  script(src='/javascript/artists.js')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous')
-  script(src='/javascript/artists.js')
-  script(src='/javascript/admin.js')
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous")
   script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js' integrity='sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh' crossorigin='anonymous')
   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js' integrity='sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ' crossorigin='anonymous')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-  link(rel='stylesheet' href='/css/admin.css')
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+ 
+  //Favicons
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
+  
+  link(href='/assets/css/style.css' rel='stylesheet')
+
+
+
   title Document
-  style.
-    .user-img{
-    height: 100px;
-    width: 100px;
-    }
+
+
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='/') UGAAMUX
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li
+          a.active(href='/admin/artists') Artists
+        li  
+          a(href='/admin/bands') Bands
+        li
+          a(href='/admin/comedians') Comedians
+ 
+      i.bi.bi-list.mobile-nav-toggle
+    // .navbar
+    a.account-btn(href='/users/logout') Log out
+// End Header 
  
 #add_artist.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        h5#exampleModalLabel.modal-title
-          | Register Artist
+        h4#exampleModalLabel.modal-title
+          | Register Artist 
         button.btn-close(type='button' data-dismiss='modal' aria-label='Close')
       .modal-body
         form.artist-form(method='post' action='/register/artists' enctype='multipart/form-data' style='max-width: 600px; margin: auto' name='registration' onsubmit='return validate()')
-            
-            h2(style='color: black;') REGISTER ARTIST
+             
+            //- .breadcrumbs(data-aos='fade-in')
+            //-     .container
+            //-         h2 Register Artist
             
             if user.success == true
         
@@ -46,42 +104,41 @@ head
                 div
                 | #{user.msg}
             label(for='start') Real name:
-            p#name-error(style='display: none;')
             .input-icons
                 i.fa.fa-user.icon  
-                input.input-field(name='username' type='text' placeholder='Odeke Trevor Angulo')
+                input.input-field(name='username' type='text' placeholder='Odeke Trevor Angulo' value=typeof name != 'undefined' ? name : '')
+                small#name-error(style='display: none;')
             label(for='start') Stage name:
-            p#stage-error(style='display: none;')
             .input-icons
                 i.fa.fa-music.icon
                 input.input-field(name='stagename' type='text' placeholder='TOdeke')
+                small#stage-error(style='display: none;')
             label(for='start') Email:
-            p#email-error(style='display: none;')
             .input-icons
                 i.fa.fa-solid.fa-at.icon 
                 input.input-field(name='email' type='text' placeholder='odeke@gmail.com')
+                small#email-error(style='display: none;')
             .row
                 .col-6
                     label(for='start') Date started:
-                    p#startdate-error(style='display: none;')
-                    input#start.input-field(type='date' name='startdate' value='2018-07-22' min='2018-01-01' max='2018-12-31')
+                    input#start.input-field(type='date' name='startdate' max='2018-12-31')
+                    small#startdate-error(style='display: none;')
                 .col-6
                     label(for='nin') Area based:
-                    p#area-error(style='display: none;')
                     .input-icons
                         i.fa.fa-compass.icon
                         input#area.input-field(name='area' type='text' placeholder='Kampala')
+                        small#area-error(style='display: none;')
             .row
                 .col-6
                     // <p>Date of birth</p>
                     label(for='start') DOB:
-                    p#dob-error(style='display: none;')
-                    input#start.input-field(type='date' name='dob' value='2000-01-01' max='2000-01-01')
+                    input#start.input-field(type='date' name='dob' max='2000-01-01')
+                    small#dob-error(style='display: none;')
                 .col-6.user_gender
                     // <p>Gender</p>
                     label(for='') Gender :
                     br
-                    p#gender-error(style='display: none;')
                     // <button name="male" class="gender" value="male">
                     // <input type="button" name="male" class="gender" value="Male" onclick="gender_male()"/>
                     input#male(type='radio' name='gender' value='male')
@@ -89,66 +146,70 @@ head
                     // <input type="button" name="female" class="gender" value="Female" onclick="gender_female()"/>
                     input#female(type='radio' name='gender' value='female')
                     label(for='female') Female
+                    small#gender-error(style='display: none;')
             .row
                 .col-6
                     label(for='nin') NIN:
-                    p#nin-error(style='display: none;')
                     .input-icons
                         i.fa.fa-id-card.icon
                         input#nin.input-field(name='nin' type='text' placeholder='NIN')
+                        small#nin-error(style='display: none;')
                 .col-6
                     label(for='location') Location:
-                    p#location-error(style='display: none;')
                     .input-icons
                         i.fa.fa-location-arrow.icon
                         input#location.input-field(name='location' type='text' placeholder='Kampala')
+                        small#location-error(style='display: none;')
             .row
                 .col-6
                     label(for='album') Number of albums:
-                    p#albums-error(style='display: none;')
-                    .input-icons
+                    .input-icons 
                         i.fa.fa-id-badge.icon
                         input#album.input-field(name='albums' type='number' placeholder='Number of albums')
+                        small#albums-error(style='display: none;')
                 .col-6
                     label(for='album') Contact:
-                    p#contact-error(style='display: none;')
                     .input-icons
                         i.fa.fa-phone.icon  
                         input#contact.input-field(name='contact' type='number' placeholder='Contact')
+                        small#contact-error(style='display: none;')
             .row
-                .col-6
+                .col-6.pt-2
                     label(for='album') Artist ID:
-                    p#artistid-error(style='display: none;')
                     .input-icons
                         i.fa.fa-id-badge.icon
                         input#artist_id.input-field(name='artistid' type='text' placeholder='Artist ID')
+                        small#artistid-error(style='display: none;')
                 
                 .col-6
                     label(for='album') Artist image:
-                    p#icon-error(style='display: none;')
                     .input-icons
                     input#profile_pic.input-field(type='file' name='image' accept='.jpg, .jpeg, .png')
+                    small#icon-error(style='display: none;')
             .row 
                 label(for='nin') Profile:
-                p#profile-error(style='display: none;')
                 .input-icons
                     i.fa.fa-user-circle.icon
                     textarea#profile.input-field(name='profile' cols='23' rows='8')
-            button.submit(type='submit' name='submitbtn') Submit
-
-            button.reset(type='reset' name='reset')
-                | Reset
+                    small#profile-error(style='display: none;')
+            .row.pt-3.pb-2
+                .col-6
+                    button.btn.btn.btn-block.submit(type='submit' name='submitbtn' style=' background-color: darkorange; color: white; width: 300px') Submit
+                .col-6
+                    button.btn.btn.btn-block.reset(type='reset' name='reset' style=' background-color: red; color: white; width: 280px') Reset
         .modal-footer
             button.btn.btn-secondary(type='button' data-dismiss='modal') Close
 
-
-include partials/messages.pug
-form.d-flex.search-artist(method='post' action='/admin/search')
+.container.d-flex.pt-5.mt-5.justify-content-center.breadcrumbs
+    b ARTISTS
+form.d-flex.container.search-artist.pt-3(method='post' action='/admin/search')
   input.form-control.me-2(type='search' placeholder='Search artist' aria-label='Search' name='search')
   button.btn.btn-outline-success(type='submit')
     | Search 
-button.btn.btn-primary(type='button' data-toggle='modal' data-target='#add_artist') Add artist  
-table.table.table-hover
+.container
+    button.d-flex.btn.btn-lg.btn-lg.justify-content-center.mt-3.add-btn(type='button' data-toggle='modal' data-target='#add_artist' style=' background-color: darkorange; color: white; ') Add artist +
+include partials/messages.pug
+table.table.table-hover.container
   thead
     tr 
       th(scope='col') #
@@ -158,7 +219,9 @@ table.table.table-hover
       th(scope='col') Area based
       th(scope='col') Location
       th(scope='col') Actions
+  - var n = 0;
   each val in user 
+    -n++
     - var values = val.artistid;
     //- #delete_artist.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
     .modal.fade(id='delete_artist'+val._id tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
@@ -174,7 +237,7 @@ table.table.table-hover
                         a.btn.btn-danger(href='/delete/'+val._id type='button') Delete artist  
     
     .modal.fade(id='view_artist'+val._id tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
-        .modal-dialog
+        .modal-dialog.modal-lg
             .modal-content
                 .modal-header
                     h5#exampleModalLabel.modal-title View Artists
@@ -184,57 +247,50 @@ table.table.table-hover
                         img.rounded.float-start(src=val.img alt='image' style='height: 300px; width: 250px;')
                     .row
                         .form-group.col-md-6
-                            label(for='fname')  Artist name
+                            b Artist name
                             p #{val.username}
                         .form-group.col-6
-                            label(for='lname') Stage name
+                            b Stage name
                             p #{val.stagename}
                     .row
                         .form-group.col-md-6
-                            label(for='name') Email
+                            b Email
                             p #{val.email}
                         .form-group.col-6
-                            label(for='user_name') Location
+                            b Location
                             p #{val.location}
                     .row
                         .form-group.col-md-6
-                            label(for='profile') Profile
-                            p #{val.profile}
+                            b Contact
+                            p #{val.contact}
                         .form-group.col-md-6
-                            label(for='dob') DOB
+                            b DOB
                             p #{moment(val.dob).format('DD/MM/YYYY')} 
                             
                     .row 
                         .form-group.col-md-6
-                            label(for='password') Area based
+                            b Area based
                             p Soroti
                         .form-group.col-md-6
-                            label(for='password') Date started
+                            b Date started
                             p #{moment(val.datestarted).format('DD/MM/YYYY')}
-                    .row
-                        .form-group.col-md-6
-                            .form-group.col-16
-                            label(for='fileToUpload') Contact
-                            p 0771419370
+                    .row 
+                            b Profile
+                            p #{val.profile}
                 .modal-footer 
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                    button.btn.btn-danger(type='button') Delete post
+                   
     //- #edit_artist.modal.fade(role='document')
     .modal.fade(id='edit_artist'+val._id tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true' role='document')
         .modal-dialog.modal-lg
             .modal-content 
                 .modal-header
                     h4.modal-title Edit Artist
-                .modal-body
+                .modal-body 
                     form.artist-form(method='post' action='/update/'+val._id style='max-width: 600px; margin: auto' name='updateform')
-                        h2(style='color: black;') UPDATE ARTIST
+                
                         .row   
-                            img.rounded.mx-auto.d-block.edit-image(src=val.img alt='image')
-                            label(for='start') User name:
-                            p#name-error(style='display: none;')
-                            .input-icons
-                                i.fa.fa-user.icon  
-                                input.input-field(name='username' type='text' placeholder='Odeke Trevor Angulo' value=val.username)
+                            img.rounded.mx-auto.d-block.edit-image(src=val.img alt='image' style='height: 300px; width: 250px;')
                             label(for='start') Stage name:
                             p#stage-error(style='display: none;')
                             .input-icons
@@ -242,40 +298,18 @@ table.table.table-hover
                                 input.input-field(name='stagename' type='text' placeholder='TOdeke' value=val.stagename)
                         .row
                             .col-6
-                                label(for='start') Date started:
-                                p#startdate-error(style='display: none;')
-                                input#start.input-field(type='date' name='startdate' value=moment(val.startdate).format('YYYY-MM-DD') min='2018-01-01' max='2018-12-31')
+                                label(for='album') Contact:
+                                p#contact-error(style='display: none;')
+                                .input-icons
+                                    i.fa.fa-phone.icon  
+                                    input#contact.input-field(name='contact' type='number' placeholder='Contact' value=val.contact)
                             .col-6
                                 label(for='nin') Area based:
                                 p#area-error(style='display: none;')
                                 .input-icons
                                     i.fa.fa-compass.icon
                                     input#area.input-field(name='area' type='text' placeholder='Kampala' value=val.area)
-                        .row
-                            .col-6
-                                // <p>Date of birth</p>
-                                label(for='start') DOB:
-                                p#dob-error(style='display: none;')
-                                input#start.input-field(type='date' name='dob' value=moment(val.dob).format('YYYY-MM-DD') max='2000-01-01')
-                            .col-6
-                                label(for='album') Artist ID:
-                                p#artistid-error(style='display: none;')
-                                .input-icons 
-                                    i.fa.fa-id-badge.icon
-                                    input#artist_id.input-field(name='artistid' type='text' placeholder='Artist ID' value=val.artistid)
-                        .row
-                            .col-6
-                                label(for='nin') NIN:
-                                p#nin-error(style='display: none;')
-                                .input-icons
-                                    i.fa.fa-id-card.icon
-                                    input#nin.input-field(name='nin' type='text' placeholder='NIN' value=val.nin)
-                            .col-6
-                                label(for='location') Location:
-                                p#location-error(style='display: none;')
-                                .input-icons
-                                    i.fa.fa-location-arrow.icon
-                                    input#location.input-field(name='location' type='text' placeholder='Kampala' value=val.location)
+
                         .row
                             .col-6
                                 label(for='album') Number of albums:
@@ -284,37 +318,39 @@ table.table.table-hover
                                     i.fa.fa-id-badge.icon
                                     input#album.input-field(name='albums' type='number' placeholder='Number of albums' value=val.albums)
                             .col-6
-                                label(for='album') Contact:
-                                p#contact-error(style='display: none;')
+                                label(for='location') Location:
+                                p#location-error(style='display: none;')
                                 .input-icons
-                                    i.fa.fa-phone.icon  
-                                    input#contact.input-field(name='contact' type='number' placeholder='Contact' value=val.contact)
+                                    i.fa.fa-location-arrow.icon
+                                    input#location.input-field(name='location' type='text' placeholder='Kampala' value=val.location)
                         .row
                             label(for='profile') Profile:
                             p#profile-error(style='display: none;')
                             .input-icons
                                 i.fa.fa-user-circle.icon
                                 textarea#profile.input-field(name='profile' cols='23' rows='8') #{val.profile}
-                        button.submit(type='submit' name='submitbtn') Submit
 
-                        
-                        button.reset(type='reset' name='reset')
-                            | Reset
+                        .row.pt-3.pb-2
+                            .col-6
+                                button.btn.btn.btn-block.col-12.submit(type='submit' name='submitbtn' style=' background-color: darkorange; color: white;') Submit
+                            .col-6
+                                button.btn.btn.btn-block.col-12.reset(type='reset' name='reset' style=' background-color: red; color: white;') Reset
                     .modal-footer
                         button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-                        button.btn.btn-primary(type='button') Save changes
+            
      
     tbody
         tr
-        th(scope='row') 1
+        th(scope='row')=n
         td
             img.user-img(src=val.img alt='')
-        td #{val.username}
+        td #{val.stagename}
         td #{val.artistid} 
         td #{val.location}
         td #{val.area}
         td
-            button.btn.btn-primary(type='button' data-toggle='modal' data-target='#edit_artist' + val._id) Edit
-            button.btn.btn-danger(type='button' data-toggle='modal' data-target='#delete_artist'+ val._id) Delete
-            button.btn.btn-success(type='button' data-toggle='modal' data-target='#view_artist'+ val._id) View
+            button.btn.btn-success.view_btn.action_btn(type='button' data-toggle='modal' data-target='#view_artist'+ val._id style=' background-color: #1a494d; color: white;') View
+            button.btn.btn.edit_btn.action_btn.pd-2(type='button' data-toggle='modal' data-target='#edit_artist' + val._id style=' background-color: #df9d10; color: white;') Edit
+            button.btn.btn-danger.del_btn.action_btn(type='button' data-toggle='modal' data-target='#delete_artist'+ val._id) Delete 
+        
  

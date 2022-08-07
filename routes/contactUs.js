@@ -5,18 +5,19 @@ const nodemailer = require('nodemailer');
 
 require('dotenv').config();
 
+//Rendering the contact us page
 router.get('/', (req, res) => {
     res.render('contact-us')
 })
 
+//Sending the emails from the contact us form
 router.post('/register', (req, res) => {
-    console.log(req.body.email)
-    console.log('Here')
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: 'trevodex@gmail.com',
-            pass: 'gonzaelvis',
+            pass: '*****',
         },
     });
 

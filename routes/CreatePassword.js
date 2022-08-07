@@ -7,40 +7,47 @@ const User = require('../models/UserModel')
 const Band = require('../models/bandModel')
 const Comedian = require('../models/comedianModel')
 
-
+//Route for rendering the password form
 router.get('/create/:id/:role', async (req, res) => {
-    // await RegisterArtist.findOne({
-    //     email: req.params.id,
-    // })
-    //     .then((data) => {
-    //         if (data.password != 'password') {
-    //             res.redirect('/login');
-    //         } else {
-    //             res.render('setpassword', {
-    //                 info: {
-    //                     success: false,
-    //                 },
-    //             });
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+
     const user = await User.findOne({
         email: req.params.id
     });
+    //Check if the user is already registered and redirect them to the login page
     if (user) {
         console.log(user)
-        res.redirect('/login');
+        res.redirect('/users/login');
+      
     } else {
-        res.render('setpassword', {
-            info: {
-                success: false,
-            },
+
+        const checkUser = await RegisterArtist.findOne({
+            email: req.params.id,
         });
+        const newCheck = await User.findOne({
+            email: req.params.id
+        })
+        const checkBand = await Band.findOne({
+            email: req.params.id
+        })
+        const checkComedian = await Comedian.findOne({
+            email: req.params.id
+        })
+        //Protect route from unregistered emails
+        if (!checkUser && !checkBand && !checkComedian) {
+            req.flash('error_msg', 'Email not registered');
+            res.redirect('/users/login');
+        } else {
+            res.render('setpassword', {
+                info: {
+                    success: false,
+                },
+            });
+        }
     }
 });
 
+
+//Route for posting to the database
 router.post('/create/:id/:role', async (req, res) => {
     const checkUser = await RegisterArtist.findOne({
         artistid: req.params.id,
@@ -51,17 +58,19 @@ router.post('/create/:id/:role', async (req, res) => {
     const checkBand = await Band.findOne({
         email: req.params.id
     })
-    const checkComedian = await Band.findOne({
+    const checkComedian = await Comedian.findOne({
         email: req.params.id
     })
-
+    //Check if the user is not already registered
     if (!newCheck) {
         const newUser = await RegisterArtist.findOne({
             email: req.params.id
         });
-        if (!checkBand && !newUser && !checkComedian) {
-            console.log('Here')
+        //Confirm that the email does not exist in the database
+        if (!checkBand && !newUser && !checkComedian && !checkUser) {
+            console.log('Not created')
             res.redirect('/users/login');
+            //Check if the user provides password as a password  
         } else if (req.body.password1 == 'password') {
             console.log('please provide a better password');
             res.render('setpassword', {

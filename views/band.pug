@@ -32,13 +32,13 @@ head
                 >
                 </li>
               li.nav-item
-                a.nav-link(href='artists.html') Artists
+                a.nav-link(href='/artists') Artists
               li.nav-item
-                a.nav-link(href='comedian.html') Comedians
+                a.nav-link(href='/comedians') Comedians
               li.nav-item
-                a.nav-link(href='band.html') Bands
+                a.nav-link(href='/bands') Bands
               li.nav-item
-                a.nav-link(href='contact.html') Contact Us
+                a.nav-link(href='/contact') Contact Us
               li.nav-item
                 a.nav-link(href='about.html') About Us
               li.nav-item.dropdown
@@ -86,7 +86,7 @@ head
       each val in user
         .col.band-area
             .card.band_info
-            img.card-img-top.band_img(src= val.bandimage alt='Band image')
+            img.card-img-top.band_img(src= val.bandicon alt='Band image')
             .card-body.band-text
                 h5.card-title #{val.bandname}
                 p.card-text

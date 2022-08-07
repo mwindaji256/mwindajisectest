@@ -1,25 +1,78 @@
 doctype html
 head
+  style. 
+    .navbar .dropdown ul {
+    display: block;
+    position: absolute;
+    left: 30px;
+    top: calc(100% + 30px);
+    margin: 0;
+    padding: 10px 0;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: 0.3s;
+    border-radius: 4px;
+    }
+    .navbar .dropdown ul li {
+      min-width: 200px;
+    }
+    .navbar .dropdown ul a {
+      padding: 10px 20px;
+      font-size: 14px;
+      text-transform: none;
+      font-weight: 500;
+    }
+    .navbar .dropdown ul a i { 
+      font-size: 12px;
+    }
+    .navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a {
+      color: #5fcf80;
+    }
+    .navbar .dropdown:hover > ul {
+      opacity: 1;
+      top: 100%;
+      visibility: visible;
+    }
+    .navbar .dropdown .dropdown ul {
+      top: 0;
+      left: calc(100% - 30px);
+      visibility: hidden;
+    }
+    .navbar .dropdown .dropdown:hover > ul {
+      opacity: 1;
+      top: 0;
+      left: 100%;
+      visibility: visible;
+    }
+    @media (max-width: 1366px) {
+      .navbar .dropdown .dropdown ul {
+        left: -90%;
+        }
+    }
   meta(charset='utf-8')
   meta(content='width=device-width, initial-scale=1.0' name='viewport')
   title Solo artists
   meta(content='' name='description')
   meta(content='' name='keywords')
   // Favicons
-  link(href='assets/img/favicon.png' rel='icon')
-  link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
   // Google Fonts
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
   // Vendor CSS Files
-  link(href='assets/vendor/animate.css/animate.min.css' rel='stylesheet')
-  link(href='assets/vendor/aos/aos.css' rel='stylesheet')
-  link(href='assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  link(href='assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
-  link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
-  link(href='assets/vendor/remixicon/remixicon.css' rel='stylesheet')
-  link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
   // Template Main CSS File
-  link(href='assets/css/style.css' rel='stylesheet')
+  link(href='/assets/css/style.css' rel='stylesheet')
+  link(href='/css/profile.css' rel='stylesheet')
   //
     =======================================================
     * Template Name: Mentor - v4.6.0
@@ -37,20 +90,27 @@ header#header.fixed-top
     nav#navbar.navbar.order-last.order-lg-0
       ul
         li 
-          a.active(href='index.html') Home
+          a(href='/') Home
         li
-          a(href='solo.html') Solo Artists
-        li  
-          a(href='band.html') Bands
+          a.active(href='/artists') Solo Artists
+        li   
+          a(href='/bands') Bands
         li
-          a(href='labels.html') Labels
+          a(href='/comedians') Comedians
         li
-          a(href='about.html') About Us
-        li
-          a(href='contact.html') Contact
+          a(href='/contact') Contact
+      i.bi.bi-list.mobile-nav-toggle
+        // .navbar
+    a.account-btn(href='/users/login') Account
+
+      i.bi.bi-list.mobile-nav-toggle 
       i.bi.bi-list.mobile-nav-toggle
     // .navbar
-    a.account-btn(href='account.html') Account
+    //- .dropdown
+      //- a.account-btn(href='account.html') Account
+
+
+
 // End Header
 
 main.content
@@ -125,11 +185,11 @@ footer#footer
 #preloader
 a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
   i.bi.bi-arrow-up-short
-// Vendor JS Files
-script(src='assets/vendor/aos/aos.js')
-script(src='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
-script(src='assets/vendor/php-email-form/validate.js')
-script(src='assets/vendor/purecounter/purecounter.js')
-script(src='assets/vendor/swiper/swiper-bundle.min.js')
+// Vendor JS Files 
+script(src='/assets/vendor/aos/aos.js')
+script(src='/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
+script(src='/assets/vendor/php-email-form/validate.js')
+script(src='/assets/vendor/purecounter/purecounter.js')
+script(src='/assets/vendor/swiper/swiper-bundle.min.js')
 // Template Main JS File
-script(src='assets/js/main.js')
+script(src='/assets/js/main.js')

@@ -1,0 +1,156 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(content='width=device-width, initial-scale=1.0' name='viewport')
+  title Bands
+  meta(content='' name='description')
+  meta(content='' name='keywords')
+  // Favicons
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
+  link(href='/assets/css/style.css' rel='stylesheet')
+  link(href='/css/profile.css' rel='stylesheet')
+  //
+    =======================================================
+    * Template Name: Mentor - v4.6.0
+    * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ========================================================
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='index.html') UGAAMUX
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li 
+          a(href='/') Home
+        li
+          a(href='/artists') Solo Artists
+        li   
+          a.active(href='/bands') Bands
+        li
+          a(href='/comedians') Comedians
+        li
+          a(href='/contact') Contact
+      i.bi.bi-list.mobile-nav-toggle
+        // .navbar
+    a.account-btn(href='/users/login') Account
+
+      i.bi.bi-list.mobile-nav-toggle 
+      i.bi.bi-list.mobile-nav-toggle
+    // .navbar
+    //- .dropdown
+      //- a.account-btn(href='account.html') Account
+
+
+
+ 
+main#main(data-aos='fade-in')
+
+section#about.section.about-section.gray-bg
+  .container
+    .row.align-items-center.flex-row-reverse
+      .col-lg-6
+        .about-text.go-to 
+          h3.dark-color #{user.bandname}
+
+          p
+            | #{user.profile}
+          .row.about-list
+            .col-md-6
+              .media
+                label Members
+                p #{user.members}
+
+            .col-md-6
+              .media
+                label Location
+                p #{user.home}
+
+      .col-lg-6
+        .about-avatar
+          img(src=user.bandimage title='' alt='' style="height: 400px; width: 400px")
+
+
+  // End #main
+  // ======= Footer =======
+  footer#footer
+    .footer-top
+      .container
+        .row
+          .col-lg-4.col-md-6.footer-contact
+            h3 Ugaamux
+            p
+              | Bukoto Block 66 
+              br
+              |               Kampala
+              br
+              |               Uganda 
+              br
+              br
+              strong Phone:
+              |  +256 755895088
+              br
+              strong Email:
+              |  info@ugaamux.com
+              br
+          .col-lg-4.col-md-6.footer-links
+            h4 Useful Links
+            ul
+              li
+                i.bx.bx-chevron-right
+                a(href='#') Home
+              li
+                i.bx.bx-chevron-right
+                a(href='#') Solo Artists
+              li 
+                i.bx.bx-chevron-right
+                a(href='#') Bands 
+              li
+                i.bx.bx-chevron-right
+                a(href='#') Music Labels
+              li
+                i.bx.bx-chevron-right
+                a(href='#') Contact us
+          .col-lg-4.col-md-6.footer-newsletter
+            h4 Join Our Newsletter
+            p Want to receive updates from Ugaamux, Join our Newsletter
+            form(action='' method='post')
+              input(type='email' name='email')
+              input(type='submit' value='Subscribe')
+    .container.d-md-flex.py-4
+      .me-md-auto.text-center.text-md-start
+        .copyright
+          | &copy; Copyright 
+          strong
+            span Ugaamux
+          | . All Rights Reserved
+        .credits
+          | Designed by Odeke Trevor
+      .social-links.text-center.text-md-right.pt-3.pt-md-0
+        a.twitter(href='#')
+          i.bx.bxl-twitter
+        a.facebook(href='#')
+          i.bx.bxl-facebook
+        a.instagram(href='#')
+          i.bx.bxl-instagram
+        a.google-plus(href='#')
+          i.bx.bxl-skype
+        a.linkedin(href='#')
+          i.bx.bxl-linkedin
+  

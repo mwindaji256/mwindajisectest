@@ -66,7 +66,7 @@ head
 .main
   form.d-flex.search-artist(method='post' action='/artists')
     select#filter.form-select(aria-label='Default select example' name='filter')
-      option(selected='' value='Name') Name
+      option(selected='' value='Name') name
       option(value='Gender') Gender
       option(value='Home') Home
       option(value='Albums') Albums
@@ -86,8 +86,8 @@ head
        .col-md-6.padding-0 
          .row.no-gutters
            .col-md-6.user-image 
-             .gallery.polaroid
-               a(target='_blank' href='img_forest.jpg')
+             .gallery.polaroid 
+               a(target='_blank' href='/details'+val._id)
                   - var img = '#{val.img}'
                   
                   img( src = val.img alt='Forest' width='600' height='400')

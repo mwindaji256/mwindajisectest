@@ -1,5 +1,6 @@
 doctype html
 head
+  
   link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU' crossorigin='anonymous')
   // JavaScript Bundle with Popper
   script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ' crossorigin='anonymous')
@@ -7,8 +8,47 @@ head
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   
+  //Favicons
+  link(href='/assets/img/favicon.png' rel='icon')
+  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
+  // Google Fonts
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
+  // Vendor CSS Files
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
+
+  link(href='/assets/css/style.css' rel='stylesheet')
+
   title Document
   link(rel='stylesheet' href='/css/login.css')
+
+// ======= Header =======
+header#header.fixed-top
+  .container.d-flex.align-items-center
+    h1.logo.me-auto
+      a(href='index.html') UGAAMUX
+    // Uncomment below if you prefer to use an image logo
+    // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+    nav#navbar.navbar.order-last.order-lg-0
+      ul
+        li
+          a(href='/') Home
+        li
+          a(href='/artists') Artists
+        li  
+          a(href='/bands') Bands
+        li
+          a(href='/comedians') Comedians
+
+
+// End Header 
+
 .wrapper.fadeInDown
   #formContent
     // Tabs Titles
@@ -23,11 +63,11 @@ head
         id="icon"
         alt="User Icon"
         />
-    // Login Form
+    // Login Form 
     form(method='POST' action='/users/login')
       input#login.fadeIn.second(type='text' name='email' placeholder='Email')
       input#password.fadeIn.third(type='password' name='password' placeholder='password')
-      input.fadeIn.fourth(type='submit' value='Log In')
+      input.fadeIn.fourth.login_btn(type='submit' value='Log In')
     // Remind Passowrd
     //
       <div id="formFooter">

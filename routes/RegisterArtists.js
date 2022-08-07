@@ -61,90 +61,17 @@ router.get('/artists', (req, res) => {
 //     });
 // })
 
-router.post('/register', (req, res) => {
-    console.log(req.body);
-    const { name, email, password, stagename, startdate, dob, gender, nin, location, albums, artistid, conntact } = req.body;
-    let errors = [];
-
-    //Check required fields
-    if (!name || !email || !password || !password2) {
-        errors.push({ msg: 'Please fill in all fields' });
-    }
-
-    //Check passwords
-    if (password !== password2) {
-        errors.push({ msg: 'Passwords do not match' });
-    }
-
-    if (password.length < 6) {
-        errors.push({ msg: 'Password should be at least 6 characters' });
-    }
-
-    if (errors.length > 0) {
-        res.render('register', {
-            errors,
-            name,
-            email,
-            password,
-            password2,
-        });
-    } else {
-        //Validation pass
-        User.findOne({ email: email }).then((user) => {
-            if (user) {
-                //user exists
-                console.log('User exists');
-                errors.push({ msg: 'Email is already registered' });
-                res.render('register', {
-                    errors,
-                    name,
-                    email,
-                    password,
-                    password2,
-                });
-            } else {
-                const newUser = new User({
-                    name,
-                    email,
-                    password,
-                });
-
-                //Hash password
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        //Set password to hashed
-                        newUser.password = hash;
-                        //Save user
-                        newUser
-                            .save()
-                            .then((user) => {
-                                req.flash(
-                                    'success_msg',
-                                    'You are now registered and can log in'
-                                );
-                                res.redirect('/users/login');
-                            })
-                            .catch((err) => console.log(err));
-                    });
-                });
-
-                console.log(newUser);
-            }
-        });
-    }
-});
 
 router.post('/artists', async (req, res) => {
     //dropdown menu filter
     if (req.body.filter == "Name") {
         console.log('Here')
-        await RegisterArtist.find({ username: req.body.search })
+        await RegisterArtist.find({ stagename: req.body.search })
             .then(data => {
                 if (data.length > 0) {
                     console.log(data)
                     //render page if user exists
-                    res.render('artists', {
+                    res.render('artist', {
                         user: data,
                     });
                 } else {
@@ -154,10 +81,8 @@ router.post('/artists', async (req, res) => {
                         } else {
 
                             console.log('Here');
-                            res.render('artists', {
-                                user: data,
-                                error: true
-                            });
+                            req.flash('error_msg', 'Artist does not exist');
+                            res.redirect('/artists');
                             // console.log(data);
                         }
                     });
@@ -173,7 +98,7 @@ router.post('/artists', async (req, res) => {
                 if (data.length > 0) {
                     console.log('Mine')
                     console.log(data)
-                    res.render('artists', {
+                    res.render('artist', {
                         user: data,
                     });
                 } else {
@@ -181,12 +106,8 @@ router.post('/artists', async (req, res) => {
                         if (err) {
                             console.log(err);
                         } else {
-
-                            console.log('Here');
-                            res.render('artists', {
-                                user: data,
-                                error: true
-                            });
+                            req.flash('error_msg', 'No artists of that gender');
+                            res.redirect('/artists');
                             // console.log(data);
                         }
                     });
@@ -202,7 +123,7 @@ router.post('/artists', async (req, res) => {
                 if (data.length > 0) {
                     console.log('Mine')
                     console.log(data)
-                    res.render('artists', {
+                    res.render('artist', {
                         user: data,
                     });
                 } else {
@@ -212,10 +133,8 @@ router.post('/artists', async (req, res) => {
                         } else {
 
                             console.log('Here');
-                            res.render('artists', {
-                                user: data,
-                                error: true
-                            });
+                            req.flash('error_msg', 'No artists from that area');
+                            res.redirect('/artists');
                             // console.log(data);
                         }
                     });
@@ -231,7 +150,7 @@ router.post('/artists', async (req, res) => {
             } else {
                 var img = data[0].img;
                 console.log(img);
-                res.render('artists', {
+                res.render('artist', {
                     user: data,
                     error: true
                 });
@@ -271,12 +190,7 @@ router.post('/register/artists', upload.single('image'), async (req, res) => {
         contact: req.body.contact,
         area: req.body.area,
         img: req.file.path.substr(6),
-        // img: {
-        //     data: fs.readFileSync(
-        //         path.join(__dirname + '/public/uploads/' + req.file.filename)
-        //     ),
-        //     contentType: 'image/png',
-        // },
+
     });
     const checkUser = await RegisterArtist.findOne({
         username: req.body.username,
@@ -300,56 +214,27 @@ router.post('/register/artists', upload.single('image'), async (req, res) => {
 
         console.log('My user exists');
         req.flash('error_msg', 'This user exists');
-        res.render('admin', {
-            user: {
-                name: `${req.body.username}`,
-                age: 24,
-                success: false,
-                msg: 'User name exists.',
-
-            },
-        });
+        res.redirect('/admin/artists');
 
     } else if (checkEmail) {
         console.log('This email exists')
         req.flash('error_msg', 'Artist id already exists');
-        res.render('admin', {
-            user: {
-                name: `${req.body.username}`,
-                age: 24,
-                success: false,
-                msg: 'This email already exists.'
-            },
-        });
+        res.redirect('/admin/artists');
     }
     else if (checkNIN) {
         console.log('This NIN exists')
         req.flash('error_msg', 'NIN already exists');
-        res.redirect('/admin');
+        res.redirect('/admin/artists');
     }
     else if (checkContact) {
         console.log('This contact exists')
         req.flash('error_msg', 'This contact exists');
-        res.render('admin', {
-            user: {
-                name: `${req.body.username}`,
-                age: 24,
-                success: false,
-                msg: 'This contact already exists.'
-            },
-        });
+        res.redirect('/admin/artists');
     }
     else if (checkId) {
-        console.log('This id exists')
+        console.log('This id already exists')
         req.flash('error_msg', 'Artist id already exists');
-        res.render('admin', {
-            user: {
-                name: `${req.body.username}`,
-                age: 24,
-                success: false,
-                msg: 'Artist ID already exists.',
-            },
-        });
+        res.redirect('/admin/artists');
     }
 
 
@@ -384,8 +269,8 @@ router.post('/register/artists', upload.single('image'), async (req, res) => {
                             console.log('Email sent: ' + info.response);
                         }
                     });
-                    req.flash('success_msg', 'Account successfully created');
-                    res.redirect('/admin')
+                    req.flash('success_msg', 'Artist successfully added');
+                    res.redirect('/admin/artists')
                 })
                 .catch((err) => {
                     console.log(err);
@@ -418,12 +303,12 @@ router.get('/delete/:id', async (req, res) => {
                     console.log(err)
                 })
             req.flash('success_msg', 'Artist successfully deleted');
-            res.redirect('/admin')
+            res.redirect('/admin/artists')
         })
         .catch(err => {
             console.log(err)
         })
-    res.redirect('/admin')
+    res.redirect('/admin/artists')
 })
 
 //Delete artist, new code
@@ -446,95 +331,96 @@ router.post('/deleteartist', async (req, res) => {
 
 //Update an artist
 router.post('/update/:id', async (req, res) => {
-    console.log(req.body)
-    //Comments from Grace, remove Nin, remove name and remove id
-    const check = false
+
     var checkName = false
-    var checkNin = false
-    var checkId = false
     var checkContact = false
-    const name = await RegisterArtist.findOne({ username: req.body.username, })
-    const nin = await RegisterArtist.findOne({ nin: req.body.nin, })
-    const artistid = await RegisterArtist.findOne({ artistid: req.body.artistid, })
-    const contact = await RegisterArtist.findOne({ contact: req.body.contact, })
 
-    await RegisterArtist.findOne({ _id: req.params.id })
-        .then(data => {
-            //Check username
-            if (data.username == req.body.username) {
-                console.log('Current name')
-                checkName = true
-            } else if (name) {
+    const noNumber = /^[A-Za-z]+$/;
+    const capitalize = /^[A-Z][a-z]/;
+    const moreThan1 = /[\w\s]+/;
+    const alphaNumeric = /^[a-zA-Z0-9]+$/;
+    const artistIdformart = /^[a-z]{3}\d+[a-z]{3}/;
+    const nationalIDFormat = /^[A-Z]{2}\d+[A-Z]{3}/;
+    const phoneFormat = /^\d{12}$/;
+    const emailFormat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
 
-                console.log('Name exists')
-                req.flash('error_msg', 'Username exists');
-                res.redirect('/admin/artists')
-            } else {
-                console.log('Name passes')
-                checkName = true
-            }
-            //Check NIN
-            if (data.nin == req.body.nin) {
-                console.log('Current nin')
-                checkNin = true
-            } else if (nin) {
-                console.log('NIN exists')
-                req.flash('error_msg', 'NIN exists');
-                res.redirect('/admin/artists')
-            } else {
-                console.log('NIN passes')
-                checkNin = true
-            }
-            //Check artistid
-            if (data.artistid == req.body.artistid) {
-                console.log('Current id')
-                checkId = true
-            } else if (artistid) {
-                console.log('ArtistID exists')
-                req.flash('error_msg', 'ArtistID exists');
-                res.redirect('/admin/artists')
-            } else {
-                console.log('ArtistID passes')
-                checkId = true
-            }
-            //Check contact
-            if (data.contact == req.body.contact) {
-                console.log('Current contact')
-                checkContact = true
-            } else if (contact) {
-                console.log('Contact exists')
-                req.flash('error_msg', 'Contact exists');
-                res.redirect('/admin/artists')
-            } else {
-                console.log('Contact passes')
-                checkContact = true
-            }
+    //Backend validation for update forms
+    if (req.body.stagename == '' || req.body.contact == '' || req.body.area == '' || req.body.albums == '' || req.body.location == '' || req.body.profile == '') {
+        req.flash('error_msg', 'Missing fields, unable to update')
+        res.redirect('/admin/artists')
+    } else if (req.body.stagename.length < 1 || !req.body.stagename.match(capitalize) || !req.body.stagename.match(alphaNumeric)) {
+        req.flash('error_msg', 'Invalid stagename')
+        res.redirect('/admin/artists')
+    } else if (req.body.location.length < 1 || !req.body.location.match(capitalize) || !req.body.location.match(noNumber)) {
+        req.flash('error_msg', 'Invalid location')
+        res.redirect('/admin/artists')
+    } else if (req.body.area.length < 1 || !req.body.area.match(capitalize) || !req.body.area.match(noNumber)) {
+        req.flash('error_msg', 'Invalid area')
+        res.redirect('/admin/artists')
+    } else {
 
-        })
-    console.log('Pass')
-    //Udate after the form passes all the tests
-    if (checkName && checkContact && checkNin && checkId) {
-        //Store the email before updating
-        const { email } = RegisterArtist.findOne({ _id: req.params.id })
 
-        await RegisterArtist.findOneAndUpdate({ _id: req.params.id }, req.body)
+
+        const stagename = await RegisterArtist.findOne({ stagename: req.body.stagename, })
+        const nin = await RegisterArtist.findOne({ nin: req.body.nin, })
+        const artistid = await RegisterArtist.findOne({ artistid: req.body.artistid, })
+        const contact = await RegisterArtist.findOne({ contact: req.body.contact, })
+
+        await RegisterArtist.findOne({ _id: req.params.id })
             .then(data => {
-                console.log(data)
+                //Check stagename
+                if (data.stagename == req.body.stagename) {
+                    console.log('Current name')
+                    checkName = true
+                } else if (stagename) {
 
-                req.flash('success_msg', 'Successfully updated details');
-                res.redirect('/admin/artists')
+                    console.log('Stagename exists')
+                    req.flash('error_msg', 'Stagename exists');
+                    res.redirect('/admin/artists')
+                } else {
+                    console.log('Stagename passes')
+                    checkName = true
+                }
+
+                //Check contact
+                if (data.contact == req.body.contact) {
+                    console.log('Current contact')
+                    checkContact = true
+                } else if (contact) {
+                    console.log('Contact exists')
+                    req.flash('error_msg', 'Contact exists');
+                    res.redirect('/admin/artists')
+                } else {
+                    console.log('Contact passes')
+                    checkContact = true
+                }
+
             })
-            .catch(err => {
-                console.log(err)
-            })
+        console.log('Pass')
+        //Udate after the form passes all the tests
+        if (checkName && checkContact) {
+            //Store the email before updating
+            const { email } = RegisterArtist.findOne({ _id: req.params.id })
+
+            await RegisterArtist.findOneAndUpdate({ _id: req.params.id }, req.body)
+                .then(data => {
+                    console.log(data)
+
+                    req.flash('success_msg', 'Successfully updated details');
+                    res.redirect('/admin/artists')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 })
 
 // get particular artist Information
 router.get("/artist/:id", async (req, res) => {
     try {
-        const detail2 = await RegisterArtist.findOne({ _id: req.params.id });
-        res.status(201).render("detail2", { artist: detail2 });
+        const details = await RegisterArtist.findOne({ _id: req.params.id });
+        res.render("detail2", { user: details });
     } catch (err) {
         res.status(400).send("Cannot find Artist");
     }

@@ -51,17 +51,11 @@ head
     .shadow-none {
     box-shadow: none !important;
     }
-  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU' crossorigin='anonymous')
-  // JavaScript Bundle with Popper
-  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ' crossorigin='anonymous')
-  meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Document
- 
+doctype html
+head
   meta(charset='utf-8')
   meta(content='width=device-width, initial-scale=1.0' name='viewport')
-  title Solo artists
+  title Bands
   meta(content='' name='description')
   meta(content='' name='keywords')
   // Favicons
@@ -70,17 +64,23 @@ head
   // Google Fonts
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
   // Vendor CSS Files
-  link(href='assets/vendor/animate.css/animate.min.css' rel='stylesheet')
-  link(href='assets/vendor/aos/aos.css' rel='stylesheet')
-  link(href='assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  link(href='assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
-  link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
-  link(href='assets/vendor/remixicon/remixicon.css' rel='stylesheet')
-  link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
-
+  link(href='/assets/vendor/animate.css/animate.min.css' rel='stylesheet')
+  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
+  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
+  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
+  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+  // Template Main CSS File
   link(href='/assets/css/style.css' rel='stylesheet')
-  title Document
-
+  link(href='/css/profile.css' rel='stylesheet')
+  //
+    =======================================================
+    * Template Name: Mentor - v4.6.0
+    * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ========================================================
 // ======= Header =======
 header#header.fixed-top
   .container.d-flex.align-items-center
@@ -90,87 +90,52 @@ header#header.fixed-top
     // <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
     nav#navbar.navbar.order-last.order-lg-0
       ul
+        li 
+          a(href='/') Home
         li
-          a(href='/admin') Home
+          a(href='/artists') Solo Artists
+        li   
+          a(href='/bands') Bands
         li
-          a(href='/admin') Artists
-        li  
-          a(href='/admin/bands') Bands
+          a.active(href='/comedians') Comedians
         li
-          a(href='/admin/comedians') Comedians
+          a(href='/contact') Contact
+      i.bi.bi-list.mobile-nav-toggle
+        // .navbar
+    a.account-btn(href='/users/login') Account
+
+      i.bi.bi-list.mobile-nav-toggle 
+      i.bi.bi-list.mobile-nav-toggle
+    // .navbar
+    //- .dropdown
+      //- a.account-btn(href='account.html') Account
 
 
-// End Header 
 
-#exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
-  .modal-dialog
-    .modal-content
-      .modal-header
-        h5#exampleModalLabel.modal-title
-          | Update details
-        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-      .modal-body
-        form.row.g-3(method='POST' name='registration' action='/comedians/update/'+user._id) 
-          .col-md-6  
-            label.form-label(for='inputEmail4') Stage name
-            input#inputEmail4.form-control(name='bandname' type='text' value=user.stagename)
-          .col-md-6
-            label.form-label(for='inputPassword4') Area based
-            input#inputNumber4.form-control(name='area' type='text' value=user.area) 
-          .col-12
-            button.btn.btn-primary(type='submit')
-              | Update
-      .modal-footer
-        button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
-          | Close
+ 
+main#main(data-aos='fade-in')
 
-#passwordModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
-  .modal-dialog
-    .modal-content
-      .modal-header 
-        h5#exampleModalLabel.modal-title
-          | Change password
-        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-      .modal-body
-        form.row.g-3(name='passwordChange' method='post' onsubmit='return validate()' action='/comedians/password_update/'+user.email) 
-          .col-md-6  
-            label.form-label(for='inputEmail4') Enter password 
-            input#inputPassword4.form-control(name='password1' type='password')
-            p#password1-error(style='display: none') 
-          .col-md-6
-            label.form-label(for='inputPassword4') Re-enter password
-            input#inputPassword3.form-control(name='password2' type='password') 
-            p#password2-error(style='display: none')
-          .col-12
-            button.btn.btn-primary(type='submit' name="submitbtn")
-              | Update
-      .modal-footer
-        button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
-          | Close    
-include partials/messages.pug
-    section#bands.bands
-      .container(data-aos='fade-up')
-        .row.g-4(data-aos='zoom-in' data-aos-delay='100')
-          
-            section.p-5.p-lg-0.pt-lg-5.mt-3.mb-5.text-center.text-sm-start
-                .container
-                    .d-sm-flex.align-items-center.justify-content-between
-                    div
-                        h1
-                        span.h3.text-warning  #{user.stagename}
-                        .card.pb-4.ml-4
-                          p.lead.my-4
-                          h5| Profile : #{user.profile}
-  
-                          h5| Location : #{user.location}
-                        
-                          | Profile: #{user.profile}
-                          br
-                          | Gender: #{user.gender}
-                    img.img-fluid.w-50.mb-5.d-none.d-sm-block.pt-3(src=user.img style="width = 300px height = 400px" alt='artist photo')
+section#about.section.about-section.gray-bg
+  .container
+    .row.align-items-center.flex-row-reverse
+      .col-lg-6
+        .about-text.go-to 
+          h3.dark-color | #{user.stagename}
+
+          p
+            | #{user.profile}
+          .row.about-list
+            .col-md-6
+              .media
+                label Location
+                p #{user.location}
+
+      .col-lg-6
+        .about-avatar
+          img(src=user.img title='' alt='' style=style="height: 400px; width: 400px")
 
 // ======= Footer =======
-footer#footer
+footer#footer 
   .footer-top
     .container
       .row

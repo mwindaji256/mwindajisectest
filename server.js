@@ -2,18 +2,12 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const ContactUs = require('./models/contactUsModel');
 const RegisterArtist = require('./models/artistModel');
-const AdminAccount = require('./models/adminModel');
-const env = require('dotenv');
 const multer = require('multer');
 const sessions = require('express-session');
 const cookieParser = require('cookie-parser');
-var fs = require('fs');
-const { startSession } = require('./models/contactUsModel');
 const flash = require('connect-flash');
 const passport = require('passport');
-const passportLocalMongoose = require('passport-local-mongoose');
 const moment = require('moment')
 
 const artistRoutes = require('./routes/RegisterArtists');
@@ -64,8 +58,6 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 app.use(cookieParser());
-
-
 
 //Setting multer
 var storage = multer.diskStorage({
@@ -123,15 +115,7 @@ mongoose.connect(
         console.log('Connected');
     }
 );
-
-mongoose.connection
-    .on('open', () => {
-        console.log('Mongoose connection open');
-    })
-    .on('error', (err) => {
-        console.log(`Connection error : ${err.message}`);
-    });
-
+ 
 //configurations or settings
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -143,66 +127,17 @@ app.get('/', (req, res) => {
     });
 });
 
+
+//Routes
 app.use('/', artistRoutes);
 app.use('/password', require('./routes/CreatePassword'));
 app.use('/users', require('./routes/users'));
-app.use('/test', require('./routes/profile'));
+app.use('/profile', require('./routes/profile'));
 app.use('/bands', require('./routes/bands'));
 app.use('/comedians', require('./routes/comedians'));
 app.use('/admin', require('./routes/admin'));
+app.use('/contact', require('./routes/contactUs'));
 
-app.get('/contact', (req, res) => {
-    res.sendFile(__dirname + '/views/contact.html');
-});
-
-app.get('/profile', (req, res) => {
-    if (req.session.userid) {
-        res.redirect('/login');
-    } else if (req.session) {
-        try {
-            RegisterArtist.findOne(
-                {
-                    username: session.userid,
-                },
-                function (err, data) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('Here we are');
-                        res.render('profile', {
-                            user: data,
-                        });
-                        // console.log(data);
-                    }
-                }
-            );
-        } catch (err) {
-            console.log(err);
-        }
-    }
-});
-
-
-//single user page
-app.get('/artists/:id', (req, res) => {
-    RegisterArtist.find({ artist: req.params.id }, (err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('artist-detail', {
-                user: data,
-            });
-        }
-    });
-});
-
-// app.get('/login', (req, res) => {
-//     res.render('login', {
-//         info: {
-//             success: false,
-//         },
-//     });
-// })
 
 app.get('/login', (req, res) => {
     res.render('login', {
@@ -212,47 +147,7 @@ app.get('/login', (req, res) => {
     });
 })
 
-app.post('/login', async (req, res) => {
-    // const login = new LoginUser(req.body);
-    // login.save((error, savedUser) => {
-    //     if (error) throw error;
-    //     res.json(savedUser);
-    // });
-    try {
-        const checkUser = await RegisterArtist.findOne({
-            username: req.body.username,
-            password: req.body.password,
-        });
 
-        const checkAdmin = await AdminAccount.findOne({
-            username: req.body.username,
-        });
-
-        if (checkUser) {
-            console.log('User exists');
-            if (checkUser.role == 'viewer') {
-                console.log(checkUser.stagename);
-                session = req.session;
-                session.userid = checkUser.username;
-                console.log(req.session);
-                res.redirect('/profile');
-            }
-        } else if (checkAdmin) {
-            console.log(checkAdmin.email);
-            session = req.session;
-            session.userid = checkAdmin.username;
-            res.redirect('/register/artists');
-        } else {
-            res.render('login', {
-                info: {
-                    success: false,
-                },
-            });
-        }
-    } catch {
-        res.send('Internal server error');
-    }
-});
 
 app.get('/changepassword/:id', async (req, res) => {
     await RegisterArtist.findOne({
@@ -312,36 +207,11 @@ app.post('/changepassword/:id', async (req, res) => {
     }
 });
 
-app.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/login');
-});
 
-app.get('/bands', (req, res) => {
-    res.sendFile(__dirname + '/views/bands.html');
-});
-
-
-
-app.get('/admin', (req, res) => {
-    RegisterArtist.find({}, function (err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            var img = data[0].img;
-            console.log(img);
-            res.render('admin', {
-                user: data,
-            });
-            // console.log(data);
-        }
-    });
-});
-
-
-
+//Handles routes to pages that do not exist
 app.get('*', (req, res) => {
-    res.status(404).send('Page does not exist');
+
+    res.render('404');
 });
 
 app.listen(port, () => {

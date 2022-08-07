@@ -1,7 +1,24 @@
+// var check = document.querySelectorAll('#myCheck');
+
+// check.forEach(ch => {
+//     console.log(ch)
+// })
+
+document.querySelectorAll('[id=test]');
+
+
+
 function myFunction() {
     // Get the checkbox
     var checkBox = document.getElementById('myCheck');
     // Get the output text
+    var check = document.querySelectorAll('#myCheck');
+
+    var els = document.getElementsByName("element1");
+    for (var i = 0; i < els.length; i++) {
+        console.log(els[i]);
+    }
+
     var text = document.getElementById('text');
 
     // If the checkbox is checked, display the output text
@@ -26,12 +43,14 @@ const validate = () => {
     const bandimage = document.registration.bandimage;
     const albums = document.registration.albums;
     const bandid = document.registration.bandid;
+    const crowns = document.registration.crowns;
+    const startdate = document.registration.startdate;
     const zip = document.registration.zip;
     const location = document.registration.location;
     const nin = document.registration.nin;
 
     const id = /^[0-9a-zA-Z]+$/;
-    const userName = /^[A-Za-z]+$/;
+    const userType = /^[A-Za-z]+$/;
     const emailType = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const capital = /^[A-Z]+$/;
 
@@ -64,12 +83,20 @@ const validate = () => {
         username.focus();
         username.style.border = '2px solid red';
         return false;
+    } else if (!username.value.match(alphaNumeric)) {
+        document.getElementById('name-error').style.display = 'block';
+        document.getElementById('name-error').innerText =
+            'Band name should be alphanumeric';
+        document.getElementById('name-error').style.color = 'red';
+        username.focus();
+        username.style.border = '2px solid red';
+        return false;
     } else {
         username.style.border = '2px solid green';
         document.getElementById('name-error').style.display = 'none';
     }
 
-    if (username.value.match(userName)) {
+    if (username.value.match(userType)) {
         username.style.border = '2px solid green';
     } else {
         username.focus();
@@ -165,6 +192,14 @@ const validate = () => {
         home.focus();
         home.style.border = '2px solid red';
         return false;
+    } else if (!home.value.match(alphaNumeric)) {
+        document.getElementById('home-error').style.display = 'block';
+        document.getElementById('home-error').innerText =
+            'Home name should be alphanumeric';
+        document.getElementById('home-error').style.color = 'red';
+        home.focus();
+        home.style.border = '2px solid red';
+        return false;
     } else {
         home.style.border = '2px solid green';
         document.getElementById('home-error').style.display = 'none';
@@ -188,7 +223,7 @@ const validate = () => {
         if (sponsors.value == '') {
             document.getElementById('sponsors-error').style.display = 'block';
             document.getElementById('sponsors-error').innerText =
-                'Please provide a sponsors for the band';
+                'Please provide a sponsor for the band';
             document.getElementById('sponsors-error').style.color = 'red';
             sponsors.focus();
             sponsors.style.border = '2px solid red';
@@ -199,6 +234,19 @@ const validate = () => {
         }
     } else {
         document.getElementById('sponsors-error').style.display = 'none';
+    }
+
+    if (startdate.value == '') {
+        document.getElementById('startdate-error').style.display = 'block';
+        document.getElementById('startdate-error').innerText =
+            'Please provide a date of formation';
+        document.getElementById('startdate-error').style.color = 'red';
+        startdate.focus();
+        startdate.style.border = '2px solid red';
+        return false;
+    } else {
+        startdate.style.border = '2px solid green';
+        document.getElementById('startdate-error').style.display = 'none';
     }
 
     if (slogan.value == '') {
@@ -230,7 +278,7 @@ const validate = () => {
     if (icon.value == '') {
         document.getElementById('icon-error').style.display = 'block';
         document.getElementById('icon-error').innerText =
-            'Please provide an image';
+            'Please provide a band icon';
         document.getElementById('icon-error').style.color = 'red';
         icon.focus();
         icon.style.border = '2px solid red';
@@ -252,16 +300,35 @@ const validate = () => {
         bandimage.style.border = '2px solid green';
         document.getElementById('image-error').style.display = 'none';
     }
-    if (bandid.value == '') {
-        document.getElementById('bandid-error').style.display = 'block';
-        document.getElementById('bandid-error').innerText =
-            'Please provide a band image';
-        document.getElementById('bandid-error').style.color = 'red';
-        bandid.focus();
-        bandid.style.border = '2px solid red';
-        return false;
+
+
+    if (crowns.value != '') {
+        if (typeof crowns.value == "number") {
+            document.getElementById('crown-error').style.display = 'block';
+            document.getElementById('crown-error').innerText =
+                'Please provide a band image';
+            document.getElementById('crown-error').style.color = 'red';
+            crowns.focus();
+            crowns.style.border = '2px solid red';
+            return false;
+        } else {
+            crowns.style.border = '2px solid green';
+            document.getElementById('crown-error').style.display = 'none';
+        }
     } else {
-        bandid.style.border = '2px solid green';
-        document.getElementById('bandid-error').style.display = 'none';
+        crowns.style.border = '2px solid green';
+        document.getElementById('crown-error').style.display = 'none';
     }
+    // if (bandid.value == '') {
+    //     document.getElementById('bandid-error').style.display = 'block';
+    //     document.getElementById('bandid-error').innerText =
+    //         'Please provide a band image';
+    //     document.getElementById('bandid-error').style.color = 'red';
+    //     bandid.focus();
+    //     bandid.style.border = '2px solid red';
+    //     return false;
+    // } else {
+    //     bandid.style.border = '2px solid green';
+    //     document.getElementById('bandid-error').style.display = 'none';
+    // }
 };

@@ -14,6 +14,10 @@ body {
     background-size: cover;
 }
 
+.add-btn {
+    background-color: darkorange;
+}
+
 .logo {
     padding-top: 0px;
     float: left;
@@ -128,7 +132,7 @@ body {
 .icon {
     padding: 10px;
     padding-top: 15px;
-    color: gray;
+    color: darkorange;
     min-width: 50px;
     text-align: center;
 }
@@ -141,7 +145,7 @@ body {
     border: 1px solid rgb(221, 221, 221);
     border-radius: 5px;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
-    color: rgb(92, 92, 92);
+    color: rgb(44, 42, 42);
 }
 
 .input-icons input[type='text'],
@@ -159,7 +163,7 @@ body {
 } */
 
 h2 {
-    color: green;
+    color: white;
 }
 /* p {
     color: green;
@@ -239,6 +243,14 @@ h2 {
     background-color: rgb(241, 241, 241);
 }
 
+.breadcrumbs {
+    margin-top: 0px;
+    text-align: center;
+    background-color: darkorange;
+    padding: 30px 0;
+    color: #fff;
+}
+
 .submit {
     padding: 10px;
     background-color: rgb(241, 241, 241);
@@ -306,7 +318,7 @@ input[type='radio']:checked + label {
 
 .user_gender input[type='radio']:checked + label {
     /* border: 1px solid red; */
-    background-color: green;
+    background-color: darkorange;
     color: white;
 }
 
@@ -392,6 +404,43 @@ body {
     height: 200px;
     width: 250px;
     border-radius: 30px;
+}
+
+.upd-img {
+    height: 200px;
+    width: 250px;
+    border-radius: 30px;
+}
+
+.artist-form {
+    top: 0;
+}
+
+/* Action buttons */
+.edit_btn {
+    background-color: #df9d10;
+    color: white;
+}
+.edit_btn:hover {
+    background-color: darkslategrey;
+    color: white;
+}
+
+.del_btn {
+    background-color: rgb(163, 65, 0);
+    color: white;
+}
+
+.del_btn:hover {
+    background-color: rgb(211, 6, 6);
+    color: white;
+}
+
+.view_btn {
+}
+
+.action_btn {
+    margin-left: 5px;
 }
 
 /* .main h1 {

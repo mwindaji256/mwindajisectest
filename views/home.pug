@@ -19,7 +19,7 @@ head
   link(href='assets/vendor/remixicon/remixicon.css' rel='stylesheet')
   link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
   // Template Main CSS File
-  link(href='assets/css/style.css' rel='stylesheet')
+  link(href='assets/css/style.css' rel='stylesheet') 
   //
     =======================================================
     * Template Name: Mentor - v4.6.0
@@ -39,18 +39,18 @@ header#header.fixed-top
         li
           a.active(href='index.html') Home
         li
-          a(href='solo.html') Solo Artists
+          a(href='/artists') Solo Artists
         li
-          a(href='band.html') Bands
+          a(href='/bands') Bands
         li
-          a(href='labels.html') Labels
+          a(href='/comedians') Comedians
         li
           a(href='about.html') About Us
         li
-          a(href='contact.html') Contact
+          a(href='/contact') Contact 
       i.bi.bi-list.mobile-nav-toggle
     // .navbar
-    a.account-btn(href='account.html') Account
+    a.account-btn(href='/users/login') Account
 // End Header
 // ======= Hero Section =======
 section#hero.d-flex.justify-content-center.align-items-center
@@ -66,126 +66,99 @@ main#main
   section#artists.artists
     .container(data-aos='fade-up')
       .section-title
-        h2 Music Bands
-        p Popular bands
+        a(href="/bands")
+          h2 Music Bands
+          p Popular bands
       .row.g-4(data-aos='zoom-in' data-aos-delay='100')
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='/images/janziband.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Janzi band
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='images/afrigo.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Afrigo band
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='images/deagle.png' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Da Eagle
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='images/code9.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Code 9
+
+  // =======  comedians Section =======
+  section#bands.bands
+    .container(data-aos='fade-up')
+      .section-title 
+        a(href="/comedians")
+          h2 Comedians
+          p Popular comedians
+      .row.g-4(data-aos='zoom-in' data-aos-delay='100')
+        .col-md-6.col-lg-3
+          .card
+            .card-body.text-center
+              a(href='artists/chenkobe')
+                img.img-fluid.mb-3(src='/images/mcmariachi.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Mc Mariachi
+        .col-md-6.col-lg-3
+          .card
+            .card-body.text-center
+              a(href='artists/chenkobe')
+                img.img-fluid.mb-3(src='/images/salvador.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Salvador
+        .col-md-6.col-lg-3
+          .card
+            .card-body.text-center
+              a(href='artists/chenkobe')
+                img.img-fluid.mb-3(src='images/tamale.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Dr.Tamale
+        .col-md-6.col-lg-3
+          .card
+            .card-body.text-center
+              a(href='artists/chenkobe')
+                img.img-fluid.mb-3(src='images/unclemo.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Uncle Mo
   // =======  bands Section =======
   section#bands.bands
     .container(data-aos='fade-up')
       .section-title
-        h2 Music labels
-        p Popular music labels
+        a(href="/artists")
+          h2 solo artists
+          p Popular solo artists
       .row.g-4(data-aos='zoom-in' data-aos-delay='100')
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='images/sheebah.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Sheebah
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='/images/kenzo.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Kenzo
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='images/cindy.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Cindy
         .col-md-6.col-lg-3
           .card
             .card-body.text-center
               a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-  // =======  bands Section =======
-  section#bands.bands
-    .container(data-aos='fade-up')
-      .section-title
-        h2 Dramatists
-        p Popular dramtists
-      .row.g-4(data-aos='zoom-in' data-aos-delay='100')
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-  // =======  bands Section =======
-  section#bands.bands
-    .container(data-aos='fade-up')
-      .section-title
-        h2 solo artists
-        p Popular solo artists
-      .row.g-4(data-aos='zoom-in' data-aos-delay='100')
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
-        .col-md-6.col-lg-3
-          .card
-            .card-body.text-center
-              a(href='artists/chenkobe')
-                img.img-fluid.mb-3(src='./assets/img/chenkobee.png' alt='')
-              h3.card-title.mb-3.text-dark Chenkobe
+                img.img-fluid.mb-3(src='images/bebe.jpeg' alt='' style="height: 235px")
+              h3.card-title.mb-3.text-dark Bebe Cool
 // End #main
 // ======= Footer =======
 footer#footer
@@ -222,7 +195,7 @@ footer#footer
               a(href='#') Bands
             li
               i.bx.bx-chevron-right
-              a(href='#') Music Labels
+              a(href='#') Comedians
             li
               i.bx.bx-chevron-right
               a(href='#') Contact us

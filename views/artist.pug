@@ -16,25 +16,24 @@ block content
     }
     .advanced {
     color: darkorange !important;
-    }
-    .form-control:focus {
+    } 
+    .form-control:focus { 
     box-shadow: none;
     border: 1px solid darkorange;
     }
   main#main(data-aos='fade-in')
     // ======= Breadcrumbs =======
     .breadcrumbs
-      .container
-        h2 Solo Artists
+      .container 
+        h2 Solo Artists 
     // End Breadcrumbs
     section#bands.bands
       form(method='post' action='/artists')
         .container
           .row.d-flex.justify-content-center
-            .col-md-10  
-              
-                .row.g-3.mt-2
-                  .col-md-3
+            .col-md-12 
+                .row.g-3.mt-0
+                  .col-md-3 
                     .dropdown
                       select#dropdownMenuButton1.btn.btn-secondary.form-select(type='button' data-bs-toggle='dropdown' aria-expanded='false' name='filter')
                         option(selected='' value='Name')
@@ -49,6 +48,7 @@ block content
                   .col-md-3
                     button.btn.btn-secondary.btn-block(type='submit')
                       | Search Results  
+            include partials/messages.pug
             .container.mt-3(data-aos='fade-up')
               .row.g-4(data-aos='zoom-in' data-aos-delay='100')
                 if user.length
